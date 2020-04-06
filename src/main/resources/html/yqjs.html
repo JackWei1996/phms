@@ -1,0 +1,78 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>园区介绍</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/page.css}" />
+<script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.js}" ></script>
+<!-- validation -->
+<script type="text/javascript" th:src="@{/js/jquery/jquery.validate.js}" ></script>
+<!-- layer -->
+<link type="text/css" rel="stylesheet" th:href="@{/plug/layui/css/layui.css}" />
+<script type="text/javascript" th:src="@{/plug/layui/layui.js}"  charset="utf-8"></script>
+
+<link type="text/css" rel="stylesheet" th:href="@{/js/layer/skin/layer.css}"/>
+<script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
+    <script src="http://usp.xzit.edu.cn//front_res/jquery.js" type="text/javascript"></script>
+    <link href="http://usp.xzit.edu.cn//front_res/front.css" type="text/css" rel="stylesheet" />
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/css/whole.css" type="text/css" rel="stylesheet" />
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/css/layout.css" type="text/css" rel="stylesheet" />
+    <!-- 新增js脚本 -->
+    <script src="http://usp.xzit.edu.cn//front_res/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="http://usp.xzit.edu.cn//front_res/js/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+    <script src="http://usp.xzit.edu.cn//front_res/js/custom.js"></script>
+    <!-- 新增的CSS样式 -->
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/main.css" rel="stylesheet" media="screen" type="text/css" />
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/mycss.css" type="text/css" rel="stylesheet" />
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/admin.css" type="text/css" rel="stylesheet" />
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/intro.css" type="text/css" rel="stylesheet" />
+    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/style.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+
+.need_span{
+	color: red;
+	display: none;
+}
+.need_0, .validation_span{
+	color: red;
+}
+.need_1{
+	color: #666666;
+}
+.input_0{
+	width: 200px;
+}
+.form_table td{
+	padding: 5px;
+}
+.text_ad_0{
+	font-weight: bold;
+	color: #444444;
+	white-space: nowrap;
+}
+</style>
+
+<script type="text/javascript"  th:inline="javascript">
+$(function(){
+
+});
+</script>
+</head>
+<body>
+<div  style="margin-left:15px; height: 400px;">
+<div class="first_div" style="border:none;">
+	<div id="adListDiv" align="left" >
+
+<!--左侧菜单end-->     <div class="right">
+       <div class="ctitle ctitle1">徐州工程学院大学科技园概况</div>
+<p>&nbsp;</p>
+<div style="text-align: left; line-height: 150%; text-indent: 21pt" align="left"><span style="line-height: 150%">徐州工程学院大学科技园有限公司（徐州</span><span style="line-height: 150%">2.5</span><span style="line-height: 150%">产业园）总部设在徐州工程学院原彭城大学校区（三环南路</span><span style="line-height: 150%">18</span><span style="line-height: 150%">号），由泉山区人民政府与徐州工程学院采用统一规划、分步实施的方式而共建。依据产业链的维度，园区分为两大部分：一部为</span><span style="line-height: 150%">生产性服务区，</span><span style="line-height: 150%">设在原彭城大学校区，占地</span><span style="line-height: 150%">106</span><span style="line-height: 150%">亩，建筑总面积为</span><span style="line-height: 150%">6</span><span style="line-height: 150%">万平方米，首期将启用1.5万平方米，用于商务办公、贸易结算、科研实验、产业孵化等；二部为外围生产承接区，设在泉山经济开发区内，占地500余亩，可用于生产加工、检测检验、仓储货运等。依据产业的功能，园区又划分为智慧城市技术区、电子商务区、工业与建筑装饰设计区、电子信息技术区、进出口贸易区、高新技术研发与成果孵化区、产业管理与服务区等八大功能区，每区之间相互衔接协同，区区成园、和谐共生。</span></div>
+<div style="text-align: left; line-height: 150%; text-indent: 21pt" align="left"><span style="line-height: 150%">作为高等学校的科技园，园区充分发挥徐州工程学院以及与之建有密切合作关系的复旦大学、北京理工大学、南京理工大学、苏州大学等高等学校的学科优势，重点发展工业设计、现代化检测技术与食品安全质量控制、先进制造技术、电子信息技术、资源与环保、新能源、新材料等高新技术产业。作为地方政府的产业园，园区主业态定位在2.5产业，即介于第二产业与第三产业之间的中间产业，主导产业为生产性服务行业&mdash;&mdash;研发、设计、市场调研、风险评估、融资、技术服务、采购、物流、咨询策划、营销推广、结算、售后服务、会展、进出口贸易、电子商务、信息管理、IT服务、教育培训、财务法律顾问、广告传媒、数据服务等。</span></div>
+<div style="text-align: left; line-height: 150%; text-indent: 21pt" align="left"><span style="line-height: 150%">园区实行董事会制度，徐州工程学院大学科技园（徐州2.5产业园）管理委员会是园区的决策机构，徐州工程学院大学科技园有限公司是园区建设、运营和管理的主体。按照董事会要求，园区以多元合作、互为依托、共存共荣为经营理念，与国内一些知名企业集团、优秀产业园、著名科研院所建立了战略合作联盟，与徐州市五县（市）五区在技术转移、成果转化等领域建立了深度合作关系。根据公司长远规划，园区着力实施企业培育计划与资产倍增计划，大力发展科技产业、生产性服务业。至今园区入住企业计有80余家，其中40%的企业是与徐州工程学院师生有密切关联性的科技型企业，60%的企业为契合2.5产业方向的生产性服务业抑或公司总部。2014年，科技园（产业园）被江苏省科学技术厅、江苏省教育厅认定为省级大学科技园（筹），被徐州市科学技术局认定为市级科技企业孵化器。</span></div>
+<div style="text-align: left; text-indent: 28pt" align="left">&nbsp;</div>       </div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>详情</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/page.css}" />
+<script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.js}" ></script>
+<!-- validation -->
+<script type="text/javascript" th:src="@{/js/jquery/jquery.validate.js}" ></script>
+<!-- layer -->
+<link type="text/css" rel="stylesheet" th:href="@{/plug/layui/css/layui.css}" />
+<script type="text/javascript" th:src="@{/plug/layui/layui.js}"  charset="utf-8"></script>
+
+<link type="text/css" rel="stylesheet" th:href="@{/js/layer/skin/layer.css}"/>
+<script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
+
+<style type="text/css">
+
+.need_span{
+	color: red;
+	display: none;
+}
+.need_0, .validation_span{
+	color: red;
+}
+.need_1{
+	color: #666666;
+}
+.input_0{
+	width: 200px;
+}
+.form_table td{
+	padding: 5px;
+}
+.text_ad_0{
+	font-weight: bold;
+	color: #444444;
+	white-space: nowrap;
+}
+</style>
+
+<script type="text/javascript"  th:inline="javascript">
+
+function getTime(val){
+	if(val){
+		val = val.split("T");
+		val2 = val[1].split("+");
+        return val[0]+" "+val2[0];
+	}
+	return "";
+}
+var item = [[${item}]];
+$(function(){
+   		//回填值
+   		$("#name").val(item.name);
+   		$("#legalPerson").val(item.legalPerson);
+   		$("#address").val(item.address);
+   		$("#money").val(item.money);
+   		$("#content").val(item.content);
+   		$("#createTime").val(getTime(item.createTime));
+	//返回按钮
+	$("#backBtu").click(function(){
+		layer.confirm('确认返回吗？', {icon: 3, title:'提示'}, function(index){
+		    parent.layer.closeAll();
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div  style="margin-left:15px; height: 400px;">
+<div class="first_div" style="border:none;">
+	<div id="adListDiv" align="left" >
+	<form>
+		<table class="form_table" style="border-collapse: collapse;margin-left:20px;margin-top:10px;">
+			<tr>
+				<td align="right" >
+					<span class="text_ad_0">公司名：</span>
+				</td>
+				<td>
+					<input id="name" name="name" class="input_0"/>
+					<span class="validation_span"></span>
+				</td>
+			</tr>
+			<tr>
+                <td align="right" >
+                    <span class="text_ad_0">法人：</span>
+                </td>
+                <td>
+                    <input id="legalPerson" name="legalPerson" class="input_0"/>
+                    <span class="validation_span"></span>
+                </td>
+            </tr>
+			<tr>
+                <td align="right" >
+                    <span class="text_ad_0">地址：</span>
+                </td>
+                <td>
+                    <input id="address" name="address" class="input_0"/>
+                    <span class="validation_span"></span>
+                </td>
+            </tr>
+			<tr>
+                <td align="right" >
+                    <span class="text_ad_0">注册资金：</span>
+                </td>
+                <td>
+                    <input id="money" name="money" class="input_0"/>
+                    <span class="validation_span"></span>
+                </td>
+            </tr>
+		    <tr>
+                <td align="right" >
+                    <span class="text_ad_0">公司简介：</span>
+                </td>
+                <td>
+                    <textarea id="content" name="content" rows="4" cols="26"></textarea>
+                    <span class="validation_span"></span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" >
+                    <span class="text_ad_0">创建日期：</span>
+                </td>
+                <td>
+                    <input id="createTime"/>
+                    <span class="validation_span"></span>
+                </td>
+            </tr>
+			<tr>
+				<td colspan="2" align="left" >
+					<div style="margin-top:10px;margin-bottom:20px;margin-left:120px;">
+						<input type="button" class="layui-btn" lay-submit="" lay-filter="add" id="backBtu" name="backBtu" value="返回" style="margin-left:20px;" />
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

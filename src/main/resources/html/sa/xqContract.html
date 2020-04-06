@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor Sample</title>
+    <script src="/samples/ckeditor.js"></script>
+    <script src="/samples/samples/js/sample.js"></script>
+    <link rel="stylesheet" href="/samples/samples/css/samples.css">
+    <link rel="stylesheet" href="/samples/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/page.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer -->
+    <link type="text/css" rel="stylesheet" th:href="@{/plug/layui/css/layui.css}"  media="all"/>
+    <script type="text/javascript" th:src="@{/plug/layui/layui.js}"  charset="utf-8"></script>
+
+    <!-- validation -->
+    <script type="text/javascript" th:src="@{/js/jquery/jquery.validate.js}" ></script>
+
+    <link type="text/css" rel="stylesheet" th:href="@{/js/layer/skin/layer.css}"/>
+    <script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Try the latest sample of CKEditor 4 and learn more about customizing your WYSIWYG editor with endless possibilities.">
+
+
+    <style type="text/css">
+
+        .need_span{
+            color: red;
+            display: none;
+        }
+        .need_0, .validation_span{
+            color: red;
+        }
+        .need_1{
+            color: #666666;
+        }
+        .input_0{
+            width: 400px;
+        }
+        .form_table td{
+            padding: 5px;
+        }
+        .text_ad_0{
+            font-weight: bold;
+            color: #444444;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body id="main">
+ <input th:value="${c}" type="hidden" id="conentHtml"/>
+<form>
+    <table class="form_table" style="margin: auto;" width='60%'>
+        <tr>
+                    <td align="right" >
+                        <span class="text_ad_0">合同标题：</span>
+                    </td>
+                    <td>
+                        <input th:value="${title}"/>
+                        <span class="validation_span"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >
+                        <span class="text_ad_0">甲方：</span>
+                    </td>
+                    <td>
+                         <input th:value="${firstParty}"/>
+                          <span class="validation_span"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >
+                        <span class="text_ad_0">乙方：</span>
+                    </td>
+                    <td>
+                         <input th:value="${secondParty}"/>
+                          <span class="validation_span"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >
+                        <span class="text_ad_0">金额：</span>
+                    </td>
+                    <td>
+                         <input th:value="${money}"/>
+                          <span class="validation_span"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >
+                        <span class="text_ad_0">签约人：</span>
+                    </td>
+                    <td>
+                         <input th:value="${sign}"/>
+                          <span class="validation_span"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" >
+                        <span class="text_ad_0">签约时间：</span>
+                    </td>
+                    <td>
+                          <input th:value="${time}"/>
+                           <span class="validation_span"></span>
+                    </td>
+                </tr>
+        <tr style="">
+        </tr>
+        <tr>
+            <!--内容-->
+                       <div id="content" style="width: 700px; padding-left: 55px;"></div>
+        </tr>
+    </table>
+</form>
+<script>
+    $(function(){
+	    var html =  $("#conentHtml").val();
+	    console.log(html);
+	    $("#content").append(html);
+    });
+</script>
+</body>
+</html>
