@@ -36,7 +36,7 @@ html, body{
 }
 
 #leftMenu{
-  background-color: #393D49;
+  background-color: #9AE2ED;
 
 }
 
@@ -44,7 +44,7 @@ html, body{
 	width: 170px;
 	height: 40px;
 	border-collapse: collapse;
-	background-color: #393D49;
+	background-color: #9AE2ED;
 	cursor: pointer;
 	margin-bottom: 2px;
 }
@@ -65,7 +65,7 @@ html, body{
 }
 
 #leftMenu .index_menu_level_0{
-	background-color: #393D49;
+	background-color: #9AE2ED;
 }
 
 .index_menu_level_1{
@@ -75,7 +75,7 @@ html, body{
 	letter-spacing: 0.5px;
 	height: 40px;
 	line-height: 40px;
-	background-color: #282B33;
+	background-color: #5EA2A2;
 	cursor: pointer;
 	text-indent: 60px;
 	margin: 1px 0px;

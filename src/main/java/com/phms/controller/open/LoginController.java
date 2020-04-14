@@ -51,6 +51,16 @@ public class LoginController {
 		return resultMap.success().message("您没有权限！");
 	}
 
+	@RequestMapping(value = "/demo/table", method = RequestMethod.GET)
+	public String demoTable() {
+		return "table";
+	}
+
+	@RequestMapping(value = "/demo/tu", method = RequestMethod.GET)
+	public String demoTu() {
+		return "tu";
+	}
+
 	/**
 	 * Method name: logout <BR>
 	 * Description: 退出登录 <BR>
