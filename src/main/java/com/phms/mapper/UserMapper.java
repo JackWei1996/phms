@@ -108,8 +108,6 @@ public interface UserMapper {
     List<User> getAllUserByNotRoleId(@Param("roleId") Integer roleId,
                                      @Param("begin") Integer begin, @Param("count") Integer count);
 
-    String getName(@Param("userId") String userId);
-
     List<User> getAllUserByLimit(UserParameter userParameter);
 
     int countAllUserByLimit(UserParameter userParameter);
@@ -118,11 +116,9 @@ public interface UserMapper {
 
     int countAllDelUserByLimit(UserParameter userParameter);
 
-    List<User> selectAllTea();
-
     List<User> selectAllUser();
 
-    User getByName(String username);
+    User getByName(@Param("username") String username);
 
     User getUserByPhoneAndName(@Param("phone") String phone, @Param("name")String name);
 

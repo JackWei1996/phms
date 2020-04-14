@@ -4,45 +4,123 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>登录页面</title>
-<link th:href="@{/css/login.css}" href="css/login.css" rel="stylesheet" type="text/css" media="all"/>
-<script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.js}" src="js/jquery/jquery-3.3.1.js" ></script>
-<link rel="stylesheet" th:href="@{/css/cloudstyle.css}" href="css/cloudstyle.css"/>
-
+<script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js" ></script>
+<style type="text/css">
+	body, html {
+		height: 100%;
+		margin: 0;
+		font-family: "Arial";
+		font-weight: lighter;
+		color: #626262;
+		background-color: #66e8dc;
+	}
+	.container {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.loginBox {
+		width: 330px;
+		background-color: white;
+		box-shadow: 0px 0px 43px -2px rgba(135,130,135,1);
+		border-radius: 8px;
+		padding: 15px;
+	}
+	.userImage {
+		border-radius: 50%;
+		overflow: hidden;
+		width: 120px;
+		height: 120px;
+		margin: 10px auto 30px;
+	}
+	img {
+		width: 100%;
+	}
+	.input-wrapper {
+		position: relative;
+	}
+	.error-userName, .error-pass, .error-nickName {
+		position: absolute;
+		top: 5px;
+		padding: 5px 10px;
+		right: 0;
+		color: white;
+		background-color: #66e8dc;
+		border-radius: 10px;
+	}
+	.triangle {
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 10px solid #66e8dc;
+		position: absolute;
+		right: 18px;
+		bottom: -8px;
+	}
+	.input2 {
+		display: block;
+		width: 300px;
+		padding: 15px 10px;
+		border-radius: 8px;
+		border: 1px solid #ececec;
+		margin: 10px 0;
+	}
+	.input3 {
+		outline: none;
+		width: 100%;
+		padding: 15px 10px;
+		margin-top: 35px;
+		border-radius: 8px;
+		background-color: #32bfb2;
+		color: white;
+		font-weight: lighter;
+	}
+	.warning {
+		border-color: red
+	}
+	.confirmation {
+		width: 200px;
+		position: absolute;
+		top: 0;
+		border-radius: 50%;
+		overflow: hidden;
+		height: 200px;
+		left: 50%;
+		margin-left: -100px;
+		top: 50%;
+		margin-top: -100px;
+		box-shadow: 10px 10px 10px;
+		z-index: 10
+	}
+	.overlay {
+		background: rgba(14, 14, 14, 0.57);
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 9;}
+	.showOk {
+		animation: showOk 1s ease 1 normal;
+		width: 200px;
+		height: 200px;
+	}
+	@keyframes showOk {
+		from {
+			transform: scale(0);
+			opacity: 0
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+</style>
 <!-- layer -->
 <link type="text/css" rel="stylesheet" th:href="@{/plug/layui/css/layui.css}"/>
 <script type="text/javascript" th:src="@{/plug/layui/layui.all.js}"  src="plug/layui/layui.all.js" ></script>
-<style>
-input::-webkit-input-placeholder {
-	color:#fff;
-}
-
-#login2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
-    padding: 13px 0;
-    background: #ffd400;
-    display: inline-block;
-    width: 50%;
-	outline:none;
-	border:2px  #FFF;
-	cursor:pointer;
-	text-transform:uppercase;
-}
-#login1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
-    padding: 13px 0;
-    background: #ff3366;
-    display: inline-block;
-    width: 50%;
-	outline:none;
-	border:2px  #FFF;
-	cursor:pointer;
-	text-transform:uppercase;
-}
-</style>
 
 <script type="text/javascript">
 
@@ -51,41 +129,55 @@ if(window != top){
 	top.location.href = location.href; 
 }
 $(function(){
-	
+	$(".error-pass, .error-userName").hide();
+	$(".overlay").hide();
+	$(".confirmation").hide();
 	$(".index_top_div").focus();
-	
-	$("#name").on("focus", function(){
-		if($(this).attr("class") == "text_first"){
-			$(this).removeClass("text_first");
-			$(this).val("");
-		}
-	});
-	
-	$("#password").on("focus", function(){
-		if($(this).attr("class") == "text_first"){
-			$(this).parent().html("<input type='password' id='password' name='password' />");
-			document.getElementById("password").focus();
-		}
-	});
+
 });
 
-function login(){
 
-	if($("#param .text_first").length > 0){
-		return false;
+function validateForm() {
+	var countErrors = 0;
+	var userName = $("#name");
+	var passInput = $("input[type=password]");
+
+	if(userName.val() < 1) {
+		$(".error-userName").fadeIn();
+		$(".userName-msg").html("用户名不能为空");
+		$(userName).addClass("warning");
+		countErrors++;
+	} else {
+		$(userName).removeClass("warning");
 	}
+
+	if(passInput.val().length < 5) {
+		$(".error-pass").fadeIn();
+		$(".pass-msg").html("密码长度不能小于5个字符");
+		$(passInput).addClass("warning");
+		countErrors++;
+	} else {
+		$(passInput).removeClass("warning");
+	}
+
+	setTimeout(function showErrorMsg() {
+		$(".error-userName, .error-pass").fadeOut();
+	}, 2000)
+
+	if(countErrors === 0) {
+		$(".overlay").show();
+		$(".confirmation").show();
+		login();
+
+	}
+}
+
+function login(){
 	// 准备参数
 	var param = new Object();
 	param.username = $.trim($("#name").val());
 	param.password = $.trim($("#password").val());
-	
-	if(param.username == ""){
-		layer.alert('用户名不可为空', {icon: 0});
-		return false;
-	}else if(param.password == ""){
-		layer.alert('密码不可为空', {icon: 0});
-		return false;
-	}
+
 
 	$.ajax({
 		type:"POST",
@@ -121,7 +213,7 @@ function key_down(num){
 		var pass = $.trim($("#password").val());
 		
 		if(name && pass){
-			login();
+			validateForm();
 		}else{
 			layer.closeAll(); //疯狂模式，关闭所有层
 		}
@@ -131,27 +223,27 @@ function key_down(num){
 </head>
 
 <body onkeydown="key_down(event.keyCode);">
-<div class="sky" style="position:absolute; width:100%; top:0px; bottom:0px; height:100%;opacity:0.75;"></div>
-<div class="login-form" style="position:relative;">
-		<div style="margin:0 auto; text-align:center;">
-			<img src="imgs/login/logo.png" alt="" style="width: 100px; height: 100px;"/>
+
+
+<div class="overlay"></div>
+
+<div class="container">
+	<div class="loginBox">
+		<div class="userImage">
+			<img src="imgs/catFace.png">
 		</div>
-		<h1>园区招商管理系统</h1>
-		<div class="login-top">
-		<form>
-			<div class="login-ic">
-				<i class="layui-icon layui-icon-username" style="font-size: 30px; color: #fff;"></i>
-				<input type="text"  placeholder="用户名" id="name"/>
-				<div class="clear"> </div>
+		<form id="loginForm">
+			<div class="input-wrapper">
+				<label>用户名:</label>
+				<input type="text" id="name"  class="input2" placeholder="请输入用户名">
+				<div class="error-userName"><div class="userName-msg"></div><div class="triangle"></div></div>
 			</div>
-			<div class="login-ic">
-				<i class="layui-icon layui-icon-password" style="font-size: 30px; color: #fff;"></i>
-				<input type="password"  placeholder="密码" id="password" name="password"  />
-				<div class="clear"> </div>
+			<div class="input-wrapper">
+				<label>密码:</label>
+				<input type="password" id="password" class="input2" placeholder="密码">
+				<div class="error-pass"><div class="pass-msg"></div><div class="triangle"></div></div>
 			</div>
-			<div class="log-bwn">
-            	<input type="button"  id="login2" value="登录" onclick="login()"><input type="button"  id="login1" value="注册" onclick="regist()">
-            </div>
+			<input type="button" name="" value="登录" class="input3" onClick="validateForm()">
 		</form>
 	</div>
 </div>

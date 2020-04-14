@@ -39,8 +39,6 @@ public interface UserService {
 
 	Object getAllDelUserByLimit(UserParameter userParameter);
 
-	String getName(String issueReporter);
-
 	List<User> selectAllUser();
 
 	User getUserByPhoneAndName(String phone, String name);

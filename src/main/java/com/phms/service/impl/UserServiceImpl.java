@@ -392,11 +392,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getName(String userId) {
-		return userMapper.getName(userId);
-	}
-
-	@Override
 	public List<User> selectAllUser() {
 		
 		return userMapper.selectAllUser();
