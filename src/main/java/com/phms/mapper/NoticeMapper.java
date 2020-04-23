@@ -2,8 +2,9 @@ package com.phms.mapper;
 
 import com.phms.pojo.Notice;
 import com.phms.pojo.NoticeExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface NoticeMapper {
     /**
@@ -93,4 +94,8 @@ public interface NoticeMapper {
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     int updateByPrimaryKey(Notice record);
+
+    List<Notice> getAllByLimit(Notice po);
+
+    int countAllByLimit(Notice po);
 }

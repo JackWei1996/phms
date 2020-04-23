@@ -2,8 +2,9 @@ package com.phms.mapper;
 
 import com.phms.pojo.Diagnosis;
 import com.phms.pojo.DiagnosisExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DiagnosisMapper {
     /**
@@ -93,4 +94,8 @@ public interface DiagnosisMapper {
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     int updateByPrimaryKey(Diagnosis record);
+
+    List<Diagnosis> getAllByLimit(Diagnosis diagnosis);
+
+    int countAllByLimit(Diagnosis diagnosis);
 }

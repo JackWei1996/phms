@@ -209,9 +209,9 @@ function save(){
 	param.phone = $.trim($("#phone").val());
 	param.email = $.trim($("#email").val());
 	param.idCard = $.trim($("#idCard").val());
-	param.companyId = $.trim($("#companyId").val());
-	param.post = $.trim($("#post").val());
-	param.role = $.trim($("#role").val());
+	param.department = $.trim($("#department").val());
+	param.hospitalName = $.trim($("#hospitalName").val());
+	param.hospitalAddress = $.trim($("#hospitalAddress").val());
 	console.log(param);
 	var urlStr = "/admin/addUser";
 	
@@ -294,7 +294,7 @@ function save(){
 					<span class="text_ad_0">职位：</span>
 				</td>
 				<td>
-					<input id="post" type="text" name="post" class="input_0" value="" />
+					<input id="department" type="text" name="department" class="input_0" value="" />
 					<span class="validation_span"></span>
 				</td>
 			</tr>
@@ -327,24 +327,34 @@ function save(){
 					<span class="validation_span"></span>
 				</td>
 			</tr>
-			<!--<tr style="">-->
-				<!--<td align="right" >-->
-					<!--<span class="text_ad_0">公司：</span>-->
-				<!--</td>-->
-				<!--<td>-->
-					<!--<input id="companyId" type="text" name="companyId" class="input_0" value="" />-->
-					<!--<span class="validation_span"></span>-->
-				<!--</td>-->
-			<!--</tr>-->
-			<tr>
-				<td style="" align="right">
-					<span class="text_ad_0">用户类型：</span>
+			<tr style="">
+				<td align="right" >
+					<span class="need_0">*</span>
+					<span class="text_ad_0">医院名：</span>
 				</td>
-				<td >
-					<select id="role" name="role" class="input_0">
-						<option value="2">企业会员</option>
-						<option value="3">高级会员</option>
-					</select>
+				<td>
+					<input id="hospitalName" type="text" name="hospitalName" class="input_0" value="" />
+					<span class="validation_span"></span>
+				</td>
+			</tr>
+			<tr style="">
+				<td align="right" >
+					<span class="need_0">*</span>
+					<span class="text_ad_0">医院地址：</span>
+				</td>
+				<td>
+					<input id="hospitalAddress" type="text" name="hospitalAddress" class="input_0" value="" />
+					<span class="validation_span"></span>
+				</td>
+			</tr>
+			<tr style="">
+				<td align="right" >
+					<span class="need_0">*</span>
+					<span class="text_ad_0">家庭住址：</span>
+				</td>
+				<td>
+					<input id="address" type="text" name="address" class="input_0" value="" />
+					<span class="validation_span"></span>
 				</td>
 			</tr>
 			<tr>

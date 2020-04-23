@@ -2,8 +2,9 @@ package com.phms.mapper;
 
 import com.phms.pojo.PetDaily;
 import com.phms.pojo.PetDailyExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PetDailyMapper {
     /**
@@ -93,4 +94,8 @@ public interface PetDailyMapper {
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     int updateByPrimaryKey(PetDaily record);
+
+    List<PetDaily> getAllByLimit(PetDaily po);
+
+    int countAllByLimit(PetDaily po);
 }

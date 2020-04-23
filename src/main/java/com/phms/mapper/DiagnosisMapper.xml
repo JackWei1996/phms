@@ -330,4 +330,48 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="getAllByLimit"
+          parameterType="com.phms.pojo.Diagnosis"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `diagnosis`
+    <where>
+      <if test="userId!=null" >
+        AND user_id = #{userId}
+      </if>
+      <if test="doctorId!=null" >
+        AND (doctor_id = #{doctorId}
+        OR doctor_id IS NULL)
+      </if>
+      <if test="info!=null and info !=''" >
+        AND info like concat('%',#{info},'%')
+      </if>
+    </where>
+    ORDER BY id DESC
+    <if test="limit!=null">
+      limit #{page}, #{limit}
+    </if>
+  </select>
+
+  <select id="countAllByLimit"
+          parameterType="com.phms.pojo.Diagnosis"
+          resultType="int">
+    SELECT count(id)
+    FROM `diagnosis`
+    <where>
+      <if test="userId!=null" >
+        AND user_id = #{userId}
+      </if>
+      <if test="doctorId!=null" >
+        AND (doctor_id = #{doctorId}
+        OR doctor_id IS NULL)
+      </if>
+      <if test="info!=null and info !=''" >
+        AND info like concat('%',#{info},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

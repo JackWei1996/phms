@@ -2,8 +2,9 @@ package com.phms.mapper;
 
 import com.phms.pojo.Pet;
 import com.phms.pojo.PetExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PetMapper {
     /**
@@ -93,4 +94,8 @@ public interface PetMapper {
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     int updateByPrimaryKey(Pet record);
+
+    List<Pet> getAllByLimit(Pet po);
+
+    int countAllByLimit(Pet po);
 }

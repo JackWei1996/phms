@@ -268,4 +268,34 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="getAllByLimit"
+          parameterType="com.phms.pojo.Notice"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `notice`
+    <where>
+      <if test="content!=null and content !=''" >
+        AND content like concat('%',#{content},'%')
+      </if>
+    </where>
+    ORDER BY id DESC
+    <if test="limit!=null">
+      limit #{page}, #{limit}
+    </if>
+  </select>
+
+  <select id="countAllByLimit"
+          parameterType="com.phms.pojo.Notice"
+          resultType="int">
+    SELECT count(id)
+    FROM `notice`
+    <where>
+      <if test="content!=null and content !=''" >
+        AND content like concat('%',#{content},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -410,4 +410,40 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="getAllByLimit"
+          parameterType="com.phms.pojo.Standard"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `standard`
+    <where>
+      <if test="status!=null and status !=''" >
+        AND status = #{status}
+      </if>
+      <if test="type !=null and type!=''">
+        type = #{type}
+      </if>
+    </where>
+    ORDER BY id DESC
+    <if test="limit!=null">
+      limit #{page}, #{limit}
+    </if>
+  </select>
+
+  <select id="countAllByLimit"
+          parameterType="com.phms.pojo.Standard"
+          resultType="int">
+    SELECT count(id)
+    FROM `standard`
+    <where>
+      <if test="status!=null and status !=''" >
+        AND status = #{status}
+      </if>
+      <if test="type !=null and type!=''">
+        type = #{type}
+      </if>
+    </where>
+  </select>
 </mapper>

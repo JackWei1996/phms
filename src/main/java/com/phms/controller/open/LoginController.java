@@ -5,6 +5,7 @@ import com.phms.model.ResultMap;
 import com.phms.pojo.Page;
 import com.phms.pojo.User;
 import com.phms.service.PageService;
+import com.phms.service.UserRoleService;
 import com.phms.service.UserService;
 import com.phms.utils.MD5;
 import org.apache.shiro.SecurityUtils;
@@ -27,9 +28,11 @@ public class LoginController {
 	@Autowired
 	private ResultMap resultMap;
 	@Autowired
-	private UserService userService;// 用户登录service
+	private UserService userService;
 	@Autowired
 	private PageService pageService;
+	@Autowired
+	private UserRoleService userRoleService;
 
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -128,14 +131,18 @@ public class LoginController {
 	@ResponseBody
 	public ResultMap doRegist(User user) {
 		System.out.println(user);
-		User u = userService.getByIdCard(user.getIdCard());
+		User u = userService.getUserByPhoneAndName(user.getPhone(), null);
 		if (u != null){
-			return resultMap.success().message("该身份证已注册!");
+			return resultMap.success().message("该手机号已注册!");
 		}
 		try {
 			user.setPassword(MD5.md5(user.getPassword()));
 			user.setCreateTime(new Date());
 			userService.save(user);
+			String[] ids = new String[1];
+			ids[0] = user.getId()+"";
+			// 普通用户
+			userRoleService.addUserRole(2, ids);
 			return resultMap.success().message("注册成功");
 		}catch (Exception e){
 			e.printStackTrace();

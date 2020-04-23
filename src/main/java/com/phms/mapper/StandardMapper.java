@@ -2,8 +2,9 @@ package com.phms.mapper;
 
 import com.phms.pojo.Standard;
 import com.phms.pojo.StandardExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface StandardMapper {
     /**
@@ -93,4 +94,8 @@ public interface StandardMapper {
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     int updateByPrimaryKey(Standard record);
+
+    List<Standard> getAllByLimit(Standard po);
+
+    int countAllByLimit(Standard po);
 }

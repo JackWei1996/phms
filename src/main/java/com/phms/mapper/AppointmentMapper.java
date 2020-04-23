@@ -2,8 +2,9 @@ package com.phms.mapper;
 
 import com.phms.pojo.Appointment;
 import com.phms.pojo.AppointmentExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AppointmentMapper {
     /**
@@ -93,4 +94,8 @@ public interface AppointmentMapper {
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     int updateByPrimaryKey(Appointment record);
+
+    List<Appointment> getAllByLimit(Appointment appointment);
+
+    int countAllByLimit(Appointment appointment);
 }

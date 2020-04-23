@@ -36,7 +36,7 @@
 			<td style="">
 			<div class="layui-btn-group">
 			  <button class="layui-btn" onclick="search()">查询</button>
-			  <button class="layui-btn" onclick="addRow()">增加</button>
+			  <button class="layui-btn" onclick="addRow()">增加医护人员</button>
 			</div>
 			</td>
 		</tr>
@@ -72,17 +72,9 @@ $(function(){
 			   {title: '姓名', name: 'name', width:50},
 			   {title: '身份证号', name: 'idCard', width:120},
 			   {title: '移动电话', name: 'phone', width:60},
-			   {title: '职位', name: 'post', width:50},
-			   {title: '邮箱', name: 'email', width:120},
-			   {title: '类型', name: 'role', width:40, renderer:function(val, item, rowIndex){
-				   if(val == 1){
-					   return "<span style='color:red'>超级管理员</span>";
-				   }else if(val == 2){
-					   return "<span style='color:blue'>公司人员</span>";
-				   }else if(val == 3){
-					   return "<span style='color:green'>超级用户</span>";
-				   }
-			   }},
+			   {title: '职位', name: 'department', width:50},
+			   {title: '医院名', name: 'hospitalName', width:120},
+			   {title: '地址', name: 'address', width:120},
 			   {title: '操作', name: 'id', width:80, renderer:function(val, item, rowIndex){
 				   var buttonStr = '<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="deleteRowOne('+"\'"+item.id+"\'"+')" >删除</span>';
 				   return "<div class='span_btus' >" + buttonStr + "</div>";

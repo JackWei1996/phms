@@ -347,4 +347,40 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="getAllByLimit"
+          parameterType="com.phms.pojo.Pet"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `pet`
+    <where>
+      <if test="name!=null and name !=''" >
+        AND name like concat('%',#{name},'%')
+      </if>
+      <if test="userId !=null and userId!=''">
+        user_id = #{userId}
+      </if>
+    </where>
+    ORDER BY id DESC
+    <if test="limit!=null">
+      limit #{page}, #{limit}
+    </if>
+  </select>
+
+  <select id="countAllByLimit"
+          parameterType="com.phms.pojo.Pet"
+          resultType="int">
+    SELECT count(id)
+    FROM `pet`
+    <where>
+      <if test="name!=null and name !=''" >
+        AND name like concat('%',#{name},'%')
+      </if>
+      <if test="userId !=null and userId!=''">
+        user_id = #{userId}
+      </if>
+    </where>
+  </select>
 </mapper>

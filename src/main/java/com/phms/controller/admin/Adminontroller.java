@@ -397,6 +397,8 @@ public class Adminontroller {
 
 			String[] ids = new String[1];
 			ids[0] = u.getId()+"";
+			// 医生角色
+			userRoleService.addUserRole(3, ids);
 			return "SUCCESS";
 		} catch (Exception e) {
 			return "ERR";

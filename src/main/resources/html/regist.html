@@ -41,24 +41,9 @@ input::-webkit-input-placeholder {
 			</div>
 			<div class="login-ic">
                 <i class="layui-icon layui-icon-notice" style="font-size: 30px; color: #fff;"></i>
-                <input type="text"  placeholder="邮箱（必填）" id="email" name="e"  lay-verify="email"  />
+                <input type="text"  placeholder="地址（必填）" id="address" name="e"  />
                 <div class="clear"> </div>
             </div>
-			<div class="login-ic">
-				<i class="layui-icon layui-icon-tips" style="font-size: 30px; color: #fff;"></i>
-				<input type="text"  placeholder="身份证（必填）" id="idCard" name="e"  />
-				<div class="clear"> </div>
-			</div>
-			<div class="login-ic">
-				<i class="layui-icon layui-icon-user" style="font-size: 30px; color: #fff;"></i>
-				<input type="text"  placeholder="公司名（公司人员需要填写）" id="companyName" name="e"  />
-				<div class="clear"> </div>
-			</div>
-			<div class="login-ic">
-				<i class="layui-icon layui-icon-location" style="font-size: 30px; color: #fff;"></i>
-				<input type="text"  placeholder="职位（公司人员需要填写）" id="post" name="e"  />
-				<div class="clear"> </div>
-			</div>
 			<div class="log-bwn">
 				<input type="button"  id="login1" value="提交注册信息" onclick="tijiao()">
 			</div>
@@ -89,19 +74,18 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 
 
 function tijiao(){
+
 	var name = $("#name").val();
 	var password = $("#password").val();
 	var phone = $("#phone").val();
-	var email = $("#email").val();
-	var idCard = $("#idCard").val();
-	var companyName = $("#companyName").val();
-	var post = $("#post").val();
-	if(name&&password&&phone&&email&&idCard){
+	var address = $("#address").val();
+	console.log(name+password+phone+address);
+	if(name&&password&&phone&&address){
+		console.log("========");
 		$.ajax({
 			type:"POST",
 			async:true,  //默认true,异步
-			data:{"name":name,"password":password,"phone":phone,"email":email,
-			"idCard":idCard,"companyName":companyName,"post":post},
+			data:{"name":name,"password":password,"phone":phone,"address":address},
 			dataType:'json',
 			timeout:20000,
 			url:"/doRegist",
@@ -134,17 +118,12 @@ function tijiao(){
 				  title: '错误提示'
 				  ,content: '请输入手机号'
 			}); 
-		}else if(!email){
+		}else if(!address){
 			layer.open({
 				  title: '错误提示'
-				  ,content: '请输入邮箱地址'
+				  ,content: '请输入地址'
 			}); 
-		}else if(!idCard){
-            layer.open({
-                  title: '错误提示'
-                  ,content: '请输入身份证号'
-            });
-        }
+		}
 	}
 	$("#login1").attr("disabled","disabled"); 
 	$("#login1").css({'background-color':'#708090'});

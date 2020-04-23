@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>申请管理</title>
+<title>就医管理</title>
 <link type="text/css" rel="stylesheet" th:href="@{/css/page.css}"/>
 <script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.js}"></script>
 <!-- mmGrid -->
@@ -35,7 +35,6 @@
 			<td style="">
 			<div class="layui-btn-group">
 			  <button class="layui-btn" onclick="search()">查询</button>
-			  <button class="layui-btn" onclick="addRow()">增加</button>
 			</div>
 			</td>
 		</tr>
@@ -51,12 +50,11 @@
 
 <script type="text/javascript">
 
-
 $(function(){	
 	//表格
 	$('#exampleTableUser').mmGrid({
     	root:'rows',// 和后台数据保存列一致,对应MMGridPageVoBean rows
-		url:"/user/apply/getAllByLimit",
+		url:"/user/diagnosis/getAllByLimitBaoJie",
     	width: 'auto',
     	height: 'auto',
     	//checkCol: true,
@@ -75,6 +73,8 @@ $(function(){
 			   {title: '地址', name: 'address', width:40},
 			   {title: '申请时间', name: 'appTime', width:30},
 			   {title: '状态', name: 'status', width:100, renderer:function(val, item, rowIndex){
+					   console.log(val);
+
 			   	//状态:1申请中,2申请通过,3不通过,4已完成
 					   var t = "";
 					   switch (val) {
@@ -84,7 +84,13 @@ $(function(){
 						   case 4: t = "已完成";break;
 					   }
 					   return t;
-			   }}
+			   }},
+			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
+					var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="passTo('+"\'"+item.id+"\'"+')" >通过</span>' +
+							'<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >不通过</span>'+
+							'<span class=" layui-btn layui-btn-sm" onclick="finish('+"\'"+item.id+"\'"+')" >完成</span>' +;
+					return "<div class='span_btus' >" + buttonStr + "</div>";
+				}}
            ],
         plugins : [
         	$('#paginator11-1').mmPaginator({
@@ -103,13 +109,47 @@ function search(){
 	$('#exampleTableUser').mmGrid().load({"page":1});
 }
 
-function addRow(){
-	layer.open({
-	    type: 2,
-	    title: '增加',
-	    area: ['60%', '70%'],
-	    content: '/user/apply/add' //iframe的url
+function passTo(id) {
+	toStatus(id, 2);
+}
+
+function dontPass(id) {
+	toStatus(id, 3);
+}
+
+function finish(id) {
+	toStatus(id, 4);
+}
+
+function toStatus(id, s) {
+	var param = new Object();
+	param.id = id;
+	param.status = s;
+	layer.confirm('确认保存吗？', {icon: 3, title:'提示'}, function(index){
+		$.ajax({
+			type:"POST",
+			async:true,  //默认true,异步
+			data:param,
+			url:"/user/apply/chStatus",
+			success:function(data){
+				console.log(data);
+				if(data == "SUCCESS"){
+					layer.alert('操作成功！', {icon: 1}, function(indexOk){
+						search();
+						layer.closeAll();
+					});
+				}else if(data == "LGINOUT"){
+					//重新登录
+					window.location.href = "/logout";
+				}else{
+					layer.alert('操作失败！', {icon: 2}, function(indexNo){
+						layer.closeAll();
+					});
+				}
+			}
+		});
 	});
 }
+
 
 </script>
