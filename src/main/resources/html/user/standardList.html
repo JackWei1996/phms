@@ -35,7 +35,6 @@
 			<td style="">
 			<div class="layui-btn-group">
 			  <button class="layui-btn" onclick="search()">查询</button>
-			  <button class="layui-btn" onclick="addRow()">增加</button>
 			</div>
 			</td>
 		</tr>
@@ -80,7 +79,7 @@ $(function(){
 			   {title: '身高最大值', name: 'heightMax', width:30},
 			   {title: '饭量最小值', name: 'appetiteMin', width:30},
 			   {title: '饭量最大值', name: 'appetiteMax', width:30},
-			  {title: '状态', name: 'type', width:100, renderer:function(val, item, rowIndex){
+			  {title: '状态', name: 'status', width:20, renderer:function(val, item, rowIndex){
 					//状态:1申请中,2申请通过,3不通过,4已完成
 					var t = "";
 					switch (val) {
@@ -90,12 +89,13 @@ $(function(){
 					}
 					return t;
 				}},
-			   {title: '类型', name: 'type', width:100, renderer:function(val, item, rowIndex){
+			   {title: '类型', name: 'type', width:20, renderer:function(val, item, rowIndex){
 			   	//状态:1申请中,2申请通过,3不通过,4已完成
+					   console.log(item);
 					   var t = "";
 					   switch (val) {
-						   case 1: t = "猫科";break;
-						   case 2: t = "犬科";break;
+						   case '1': t = "猫科";break;
+						   case '2': t = "犬科";break;
 					   }
 					   return t;
 			   }},{title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
