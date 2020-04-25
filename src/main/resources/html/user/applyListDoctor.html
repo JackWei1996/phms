@@ -54,7 +54,7 @@ $(function(){
 	//表格
 	$('#exampleTableUser').mmGrid({
     	root:'rows',// 和后台数据保存列一致,对应MMGridPageVoBean rows
-		url:"/user/apply/getAllByLimitBaoJie",
+		url:"/user/apply/getAllByLimitDoctor",
     	width: 'auto',
     	height: 'auto',
     	//checkCol: true,
@@ -86,9 +86,12 @@ $(function(){
 					   return t;
 			   }},
 			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="passTo('+"\'"+item.id+"\'"+')" >通过</span>' +
-							'<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >不通过</span>'+
-							'<span class=" layui-btn layui-btn-sm" onclick="finish('+"\'"+item.id+"\'"+')" >完成</span>' +;
+					var buttonStr ='<span class=" layui-btn layui-btn-sm"" >已处理</span>';
+					if (item.status == 1){
+						buttonStr+='<span class=" layui-btn layui-btn-sm" onclick="passTo('+"\'"+item.id+"\'"+')" >通过</span>'+
+								'<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >不通过</span>'+
+						'<span class=" layui-btn layui-btn-sm" onclick="finish('+"\'"+item.id+"\'"+')" >就诊</span>';
+					}
 					return "<div class='span_btus' >" + buttonStr + "</div>";
 				}}
            ],
@@ -121,11 +124,24 @@ function finish(id) {
 	toStatus(id, 4);
 }
 
+function addRow(id){
+	layer.open({
+		type: 2,
+		title: '增加',
+		area: ['60%', '70%'],
+		content: '/user/diagnosis/add?id='+id //iframe的url
+	});
+}
+
 function toStatus(id, s) {
 	var param = new Object();
 	param.id = id;
 	param.status = s;
-	layer.confirm('确认保存吗？', {icon: 3, title:'提示'}, function(index){
+	var msg = '确认保存吗？';
+	if (s==4){
+		msg = "前去就诊?";
+	}
+	layer.confirm(msg, {icon: 3, title:'提示'}, function(index){
 		$.ajax({
 			type:"POST",
 			async:true,  //默认true,异步
@@ -138,9 +154,9 @@ function toStatus(id, s) {
 						search();
 						layer.closeAll();
 					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
+				}else if(data == "jz"){
+					//就诊
+					addRow(param.id);
 				}else{
 					layer.alert('操作失败！', {icon: 2}, function(indexNo){
 						layer.closeAll();

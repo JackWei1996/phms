@@ -10,4 +10,6 @@ public interface AppointmentService {
     void add(Appointment appointment);
 
     void update(Appointment appointment);
+
+    Appointment getById(Long id);
 }

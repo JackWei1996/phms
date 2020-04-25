@@ -1,7 +1,9 @@
 package com.phms.controller.user;
 
+import com.phms.pojo.Appointment;
 import com.phms.pojo.Diagnosis;
 import com.phms.pojo.User;
+import com.phms.service.AppointmentService;
 import com.phms.service.DiagnosisService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,6 +24,8 @@ import java.util.Date;
 public class UserDiagnosisController {
     @Autowired
     private DiagnosisService diagnosisService;
+    @Autowired
+    private AppointmentService appointmentService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
@@ -72,7 +77,10 @@ public class UserDiagnosisController {
     }
 
     @RequestMapping(value = "/add")
-    public String addUserPage() {
+    public String addUserPage(Long id, Model model) {
+        Appointment byId = appointmentService.getById(id);
+        model.addAttribute("userId", byId.getUserId());
+        model.addAttribute("petId", byId.getPetId());
         return "user/diagnosisAdd";
     }
 

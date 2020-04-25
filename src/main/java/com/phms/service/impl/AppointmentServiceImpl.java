@@ -52,4 +52,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void update(Appointment appointment) {
         appointmentMapper.updateByPrimaryKeySelective(appointment);
     }
+
+    @Override
+    public Appointment getById(Long id) {
+        return appointmentMapper.selectByPrimaryKey(id);
+    }
 }

@@ -46,7 +46,7 @@ layui.use('laydate', function(){
 
 	  //执行一个laydate实例
 	  laydate.render({
-	    elem: '#appTime' //指定元素
+	    elem: '#birthday' //指定元素
           ,type: 'datetime'
 	    ,trigger : 'click'
 	  });
@@ -175,7 +175,7 @@ function save(){
                     <span class="text_ad_0">体重：</span>
                 </td>
                 <td>
-                    <input id="weight" type="text" name="weight" class="input_0"/>
+                    <input id="weight" type="text" name="weight" class="input_0" placeholder="单位Kg"/>
                     <span class="validation_span"></span>
                 </td>
             </tr>
@@ -185,7 +185,7 @@ function save(){
                     <span class="text_ad_0">身高：</span>
                 </td>
                 <td>
-                    <input id="height" name="height"  class="input_0"/>
+                    <input id="height" name="height"  class="input_0" placeholder="单位cm"/>
                     <span class="validation_span"></span>
                 </td>
             </tr>
@@ -195,8 +195,10 @@ function save(){
                     <span class="text_ad_0">类型：</span>
                 </td>
                 <td>
-                    <input id="type" name="type"  class="input_0"/>
-                    <span class="validation_span"></span>
+                    <select id="type" name="type" class="input_0">
+                        <option value="1">猫科</option>
+                        <option value="2">犬科</option>
+                    </select>
                 </td>
             </tr>
 			<tr>

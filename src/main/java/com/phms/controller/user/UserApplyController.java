@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -72,7 +73,8 @@ public class UserApplyController {
     }
 
     @RequestMapping(value = "/add")
-    public String addUserPage() {
+    public String addUserPage(Long id, Model model) {
+        model.addAttribute("petId", id);
         return "user/applyAdd";
     }
 
@@ -102,9 +104,15 @@ public class UserApplyController {
     public String chStatus(Appointment appointment) {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
+
+
         try {
             appointment.setDoctorId(user.getId());
             appointmentService.update(appointment);
+            // 就诊
+            if (appointment.getStatus() == 4){
+                return "jz";
+            }
             return "SUCCESS";
         } catch (Exception e) {
             logger.error("添加异常", e);

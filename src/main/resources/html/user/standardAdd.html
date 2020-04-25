@@ -314,11 +314,13 @@ function save(){
             <tr>
                 <td align="right" >
                     <span class="need_0">*</span>
-                    <span class="text_ad_0">宠物类型：</span>
+                    <span class="text_ad_0">类型：</span>
                 </td>
                 <td>
-                    <input id="type" name="type"  class="input_0"/>
-                    <span class="validation_span"></span>
+                    <select id="type" name="type" class="input_0">
+                        <option value="1">猫科</option>
+                        <option value="2">犬科</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -327,8 +329,11 @@ function save(){
                     <span class="text_ad_0">状态：</span>
                 </td>
                 <td>
-                    <input id="status" name="status"  class="input_0"/>
-                    <span class="validation_span"></span>
+                    <select id="status" name="status" class="input_0">
+                        <option value="1">正常</option>
+                        <option value="2">异常</option>
+                        <option value="3">生病</option>
+                    </select>
                 </td>
             </tr>
 			<tr>

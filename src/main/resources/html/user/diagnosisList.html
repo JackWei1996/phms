@@ -54,7 +54,7 @@ $(function(){
 	//表格
 	$('#exampleTableUser').mmGrid({
     	root:'rows',// 和后台数据保存列一致,对应MMGridPageVoBean rows
-		url:"/user/diagnosis/getAllByLimitBaoJie",
+		url:"/user/diagnosis/getAllByLimit",
     	width: 'auto',
     	height: 'auto',
     	//checkCol: true,
@@ -68,29 +68,35 @@ $(function(){
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
-			   {title: '内容', name: 'info', width:40},
-			   {title: '电话', name: 'phone', width:40},
-			   {title: '地址', name: 'address', width:40},
-			   {title: '申请时间', name: 'appTime', width:30},
-			   {title: '状态', name: 'status', width:100, renderer:function(val, item, rowIndex){
-					   console.log(val);
+			   {title: '宠物名', name: 'name', width:40},
+			   {title: '医生名', name: 'doctorName', width:40},
+			   {title: '诊疗建议', name: 'info', width:40},
+			{title: '类型', name: 'tpye', width:100, renderer:function(val, item, rowIndex){
+					console.log(val);
 
-			   	//状态:1申请中,2申请通过,3不通过,4已完成
-					   var t = "";
-					   switch (val) {
-						   case 1: t = "申请中";break;
-						   case 2: t = "申请通过";break;
-						   case 3: t = "不通过";break;
-						   case 4: t = "已完成";break;
-					   }
-					   return t;
-			   }},
-			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="passTo('+"\'"+item.id+"\'"+')" >通过</span>' +
-							'<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >不通过</span>'+
-							'<span class=" layui-btn layui-btn-sm" onclick="finish('+"\'"+item.id+"\'"+')" >完成</span>' +;
-					return "<div class='span_btus' >" + buttonStr + "</div>";
-				}}
+					//状态:1申请中,2申请通过,3不通过,4已完成
+					var t = "";
+					switch (val) {
+						case '1': t = "正常就医";break;
+						case '2': t = "注射疫苗";break;
+						case '3': t = "驱虫";break;
+					}
+					return t;
+				}},
+			{title: '状态', name: 'status', width:100, renderer:function(val, item, rowIndex){
+					console.log(val);
+
+					//状态:1申请中,2申请通过,3不通过,4已完成
+					var t = "";
+					switch (val) {
+						case '1': t = "正常";break;
+						case '2': t = "严重";break;
+						case '3': t = "较重";break;
+						case '4': t = "死亡";break;
+					}
+					return t;
+				}},
+			   {title: '创建时间', name: 'createTime', width:30}
            ],
         plugins : [
         	$('#paginator11-1').mmPaginator({
@@ -125,7 +131,11 @@ function toStatus(id, s) {
 	var param = new Object();
 	param.id = id;
 	param.status = s;
-	layer.confirm('确认保存吗？', {icon: 3, title:'提示'}, function(index){
+	var msg = '确认保存吗？';
+	if (s==4){
+		msg = "确定就诊吗?";
+	}
+	layer.confirm(msg, {icon: 3, title:'提示'}, function(index){
 		$.ajax({
 			type:"POST",
 			async:true,  //默认true,异步

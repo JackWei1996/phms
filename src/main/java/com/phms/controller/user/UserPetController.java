@@ -1,6 +1,5 @@
 package com.phms.controller.user;
 
-import com.phms.pojo.Appointment;
 import com.phms.pojo.Pet;
 import com.phms.pojo.User;
 import com.phms.service.PetService;
@@ -61,7 +60,10 @@ public class UserPetController {
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
-    public String delUser(Long id) {
+    public String delUser(Long id, Long type) {
+        if (type!=null && type ==2){
+            return "app";
+        }
         try {
             petService.deleteById(id);
             return "SUCCESS";

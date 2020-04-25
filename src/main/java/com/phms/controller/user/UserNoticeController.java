@@ -30,7 +30,7 @@ public class UserNoticeController {
         model.addAttribute("title", word.getTitle());
         model.addAttribute("view", word.getViewCount());
         model.addAttribute("time", MyUtils.getDate2String(word.getCreateTime()));
-        return "/sa/xqWord";
+        return "/user/xqWord";
     }
     @RequestMapping("/list")
     public String list() {

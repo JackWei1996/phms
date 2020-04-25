@@ -1,5 +1,7 @@
 package com.phms.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Pet extends BaseBean{
@@ -64,6 +66,7 @@ public class Pet extends BaseBean{
      *
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 
     /**

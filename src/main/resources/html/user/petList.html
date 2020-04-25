@@ -75,15 +75,17 @@ $(function(){
 			   {title: '身高', name: 'height', width:40},
 			   {title: '出生时间', name: 'birthday', width:30},
 			   {title: '类型', name: 'type', width:100, renderer:function(val, item, rowIndex){
-			   	//状态:1申请中,2申请通过,3不通过,4已完成
+			   			console.log(val);
+					   console.log(item);
 					   var t = "";
 					   switch (val) {
-						   case 1: t = "猫科";break;
-						   case 2: t = "犬科";break;
+						   case '1': t = "猫科";break;
+						   case '2': t = "犬科";break;
 					   }
 					   return t;
 			   }},{title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>';
+					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>'+
+							'<span class=" layui-btn layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+", 2"+')" >预约就诊</span>';;
 					return "<div class='span_btus' >" + buttonStr + "</div>";
 				}}
            ],
@@ -113,11 +115,25 @@ function addRow(){
 	});
 }
 
+function apply(id){
+	layer.open({
+		type: 2,
+		title: '增加',
+		area: ['60%', '70%'],
+		content: '/user/apply/add?id='+id //iframe的url
+	});
+}
 
-function dontPass(id) {
+
+function dontPass(id, flg) {
 	var param = new Object();
 	param.id = id;
-	layer.confirm('确认删除吗？', {icon: 3, title:'提示'}, function(index){
+	param.type = flg;
+	var str = '确认删除吗？';
+	if (flg==2){
+		str = "前去预约就诊?";
+	}
+	layer.confirm(str, {icon: 3, title:'提示'}, function(index){
 		$.ajax({
 			type:"POST",
 			async:true,  //默认true,异步
@@ -130,9 +146,9 @@ function dontPass(id) {
 						search();
 						layer.closeAll();
 					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
+				}else if(data == "app"){
+					//预约
+					apply(param.id);
 				}else{
 					layer.alert('操作失败！', {icon: 2}, function(indexNo){
 						layer.closeAll();
