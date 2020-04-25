@@ -88,9 +88,11 @@ $(function(){
 			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
 					var buttonStr ='<span class=" layui-btn layui-btn-sm"" >已处理</span>';
 					if (item.status == 1){
-						buttonStr+='<span class=" layui-btn layui-btn-sm" onclick="passTo('+"\'"+item.id+"\'"+')" >通过</span>'+
-								'<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >不通过</span>'+
-						'<span class=" layui-btn layui-btn-sm" onclick="finish('+"\'"+item.id+"\'"+')" >就诊</span>';
+						buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="passTo('+"\'"+item.id+"\'"+')" >通过</span>'+
+								'<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >不通过</span>';
+					}
+					if(item.status ==2 ){
+						buttonStr = '<span class=" layui-btn layui-btn-sm" onclick="finish('+"\'"+item.id+"\'"+')" >就诊</span>';
 					}
 					return "<div class='span_btus' >" + buttonStr + "</div>";
 				}}

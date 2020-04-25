@@ -91,7 +91,7 @@ public class UserDiagnosisController {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         try {
-            diagnosis.setUserId(user.getId());
+            diagnosis.setDoctorId(user.getId());
             diagnosis.setCreateTime(new Date());
             // 状态:1申请中,2申请通过,3不通过,4已完成
             diagnosis.setStatus(1);
