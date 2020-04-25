@@ -60,14 +60,14 @@ $(function(){
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
 			   {title: '姓名', name: 'name', width:80},
 			   {title: '联系电话', name: 'phone', width:100},
-			 
+
 			   {title: '类型', name: 'role', width:50, renderer:function(val, item, rowIndex){
 					   if(val == 1){
 						   return "<span style='color:red'>超级管理员</span>";
 					   }else if(val == 2){
-						   return "<span style='color:green'>企业用户</span>";
+						   return "<span style='color:green'>普通用户</span>";
 					   }else if(val == 3){
-						   return "<span style='color:blue'>超级用户</span>";
+						   return "<span style='color:blue'>医护人员</span>";
 					   }
 			   }},
 			   {title: '操作', name: 'roleId', width:40, align:'center', renderer:function(val, item, rowIndex){
