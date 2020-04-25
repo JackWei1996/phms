@@ -20,6 +20,15 @@ public class Notice  extends BaseBean{
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     private String content;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     /**
      *

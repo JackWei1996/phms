@@ -39,6 +39,18 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    public Notice getById(Long id) {
+        return noticeMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void view(Long id) {
+        Notice notice = noticeMapper.selectByPrimaryKey(id);
+        notice.setViewCount(notice.getViewCount() +1);
+        noticeMapper.updateByPrimaryKey(notice);
+    }
+
+    @Override
     public void deleteById(Long id) {
         noticeMapper.deleteByPrimaryKey(id);
     }

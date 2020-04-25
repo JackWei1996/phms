@@ -10,4 +10,8 @@ public interface NoticeService {
     void deleteById(Long id);
 
     Object getAllByLimit(Notice notice);
+
+    Notice getById(Long id);
+
+    void view(Long id);
 }
