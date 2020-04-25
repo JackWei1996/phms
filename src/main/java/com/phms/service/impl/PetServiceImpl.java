@@ -39,6 +39,11 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
+    public Pet selectByPrimaryKey(Long petId) {
+        return petMapper.selectByPrimaryKey(petId);
+    }
+
+    @Override
     public void deleteById(Long id) {
         petMapper.deleteByPrimaryKey(id);
     }

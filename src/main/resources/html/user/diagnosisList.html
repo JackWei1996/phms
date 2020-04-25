@@ -69,30 +69,29 @@ $(function(){
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
 			   {title: '宠物名', name: 'name', width:40},
+			   {title: '用户名', name: 'userName', width:40},
 			   {title: '医生名', name: 'doctorName', width:40},
 			   {title: '诊疗建议', name: 'info', width:40},
-			{title: '类型', name: 'tpye', width:100, renderer:function(val, item, rowIndex){
-					console.log(val);
-
-					//状态:1申请中,2申请通过,3不通过,4已完成
+			{title: '类型', name: 'type', width:30, renderer:function(val, item, rowIndex){
+				console.log(item);
 					var t = "";
 					switch (val) {
-						case '1': t = "正常就医";break;
-						case '2': t = "注射疫苗";break;
-						case '3': t = "驱虫";break;
+						case 1: t = "正常就医";break;
+						case 2: t = "注射疫苗";break;
+						case 3: t = "驱虫";break;
 					}
 					return t;
 				}},
-			{title: '状态', name: 'status', width:100, renderer:function(val, item, rowIndex){
+			{title: '状态', name: 'status', width:30, renderer:function(val, item, rowIndex){
 					console.log(val);
 
 					//状态:1申请中,2申请通过,3不通过,4已完成
 					var t = "";
 					switch (val) {
-						case '1': t = "正常";break;
-						case '2': t = "严重";break;
-						case '3': t = "较重";break;
-						case '4': t = "死亡";break;
+						case 1: t = "正常";break;
+						case 2: t = "严重";break;
+						case 3: t = "较重";break;
+						case 4: t = "死亡";break;
 					}
 					return t;
 				}},
@@ -114,52 +113,4 @@ $(function(){
 function search(){
 	$('#exampleTableUser').mmGrid().load({"page":1});
 }
-
-function passTo(id) {
-	toStatus(id, 2);
-}
-
-function dontPass(id) {
-	toStatus(id, 3);
-}
-
-function finish(id) {
-	toStatus(id, 4);
-}
-
-function toStatus(id, s) {
-	var param = new Object();
-	param.id = id;
-	param.status = s;
-	var msg = '确认保存吗？';
-	if (s==4){
-		msg = "确定就诊吗?";
-	}
-	layer.confirm(msg, {icon: 3, title:'提示'}, function(index){
-		$.ajax({
-			type:"POST",
-			async:true,  //默认true,异步
-			data:param,
-			url:"/user/diagnosis/chStatus",
-			success:function(data){
-				console.log(data);
-				if(data == "SUCCESS"){
-					layer.alert('操作成功！', {icon: 1}, function(indexOk){
-						search();
-						layer.closeAll();
-					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
-				}else{
-					layer.alert('操作失败！', {icon: 2}, function(indexNo){
-						layer.closeAll();
-					});
-				}
-			}
-		});
-	});
-}
-
-
 </script>

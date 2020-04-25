@@ -13,22 +13,6 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
     <link rel="stylesheet" href="/samples/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <link type="text/css" rel="stylesheet" th:href="@{/css/page.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.js}"></script>
-
-    <script src="http://usp.xzit.edu.cn//front_res/jquery.js" type="text/javascript"></script>
-    <link href="http://usp.xzit.edu.cn//front_res/front.css" type="text/css" rel="stylesheet" />
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/css/whole.css" type="text/css" rel="stylesheet" />
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/css/layout.css" type="text/css" rel="stylesheet" />
-    <!-- 新增js脚本 -->
-    <script src="http://usp.xzit.edu.cn//front_res/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script src="http://usp.xzit.edu.cn//front_res/js/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
-    <script src="http://usp.xzit.edu.cn//front_res/js/custom.js"></script>
-    <!-- 新增的CSS样式 -->
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/main.css" rel="stylesheet" media="screen" type="text/css" />
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/mycss.css" type="text/css" rel="stylesheet" />
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/admin.css" type="text/css" rel="stylesheet" />
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/intro.css" type="text/css" rel="stylesheet" />
-    <link href="http://usp.xzit.edu.cn//res_base/xdxy_www/default/article/indexcss/style.css" type="text/css" rel="stylesheet" />
-
     <link type="text/css" rel="stylesheet" th:href="@{/js/layer/skin/layer.css}"/>
     <script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -50,8 +34,9 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
             <input th:value="${c}" type="hidden" id="conentHtml"/>
             <div class="right">
                 <!--标题-->
-                <div class="ctitle ctitle1" id="title"><span th:text="${title}">标题</span></div>
-                <div class="ctitleinfo">发布日期：<span th:text="${time}">时间</span>&nbsp;&nbsp;&nbsp;查看次数：<span th:text="${view}">次数</span>次</div>
+                <div class="ctitle ctitle1" id="title"><h1 align="center"><span th:text="${title}">标题</span></h1></div>
+                <div style="text-align:center;color: #0C0C0C;font-size: larger">发布日期：<span th:text="${time}">时间</span>&nbsp;&nbsp;&nbsp;查看次数：<span th:text="${view}">次数</span>次</div>
+               <hr/>
                 <div class="pboxContent" style="overflow-x:auto;padding-right:50px">
                     <p>&nbsp;</p>
                 </div>

@@ -72,6 +72,7 @@ $(function(){
    		$("#email").val(manageUser.email);
    		$("#idCard").val(manageUser.idCard);
    		$("#post").val(manageUser.post);
+   		$("#address").val(manageUser.address);
    	}
 	//验证数字长度
 	$.validator.addMethod(
@@ -134,10 +135,13 @@ $(function(){
 	        	email:true,
 	        	maxlength:100
 	        },
-	        Idcard: {
+			idCard: {
 	        	required:true,
 	        	 rangelength:[18, 18],
-	        }
+	        },
+			address: {
+				required:true
+			}
 	    },      
 	    /**//* 设置错误信息 */    
 	    messages: {     
@@ -154,11 +158,11 @@ $(function(){
 	        	email:"请输入正确的邮箱",
 	        	maxlength:"最多100个字符"
 	        },
-	        userAddress: {
+	        address: {
 	        	maxlength:"最多100个字符"
 	        }
 	        ,
-	        userIdcard: {
+			idCard: {
 	        	required:"身份证不可为空",
 	        	rangelength:"身份证不正确",
 	        }
@@ -197,6 +201,7 @@ function save(){
 	param.phone = $.trim($("#phone").val());
 	param.email = $.trim($("#email").val());
 	param.idCard = $.trim($("#idCard").val());
+	param.address = $.trim($("#address").val());
 	param.post = $("#post").val();
 	
 	var urlStr = "/user/updateUser";
@@ -258,7 +263,6 @@ function save(){
 
 			<tr style="">
 				<td align="right" >
-				    <span class="need_0">*</span>
 					<span class="text_ad_0">身份证号：</span>
 				</td>
 				<td>
@@ -284,7 +288,15 @@ function save(){
 					<span class="validation_span"></span>
 				</td>
 			</tr>
-			
+			<tr>
+				<td align="right" >
+					<span class="text_ad_0">地址：</span>
+				</td>
+				<td>
+					<input id="address" type="text" name="address" class="input_0" />
+					<span class="validation_span"></span>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="2" align="left" >
 					<div style="margin-top:10px;margin-bottom:20px;margin-left:120px;">

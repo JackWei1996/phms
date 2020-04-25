@@ -10,4 +10,6 @@ public interface PetService {
     void deleteById(Long id);
 
     Object getAllByLimit(Pet po);
+
+    Pet selectByPrimaryKey(Long petId);
 }

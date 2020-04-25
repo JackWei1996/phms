@@ -49,6 +49,15 @@ public class Diagnosis extends BaseBean {
     private String info;
     private String name;
     private String doctorName;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getName() {
         return name;

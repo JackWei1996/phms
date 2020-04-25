@@ -3,8 +3,10 @@ package com.phms.service.impl;
 import com.phms.mapper.DiagnosisMapper;
 import com.phms.model.MMGridPageVoBean;
 import com.phms.pojo.Diagnosis;
+import com.phms.pojo.Pet;
 import com.phms.pojo.User;
 import com.phms.service.DiagnosisService;
+import com.phms.service.PetService;
 import com.phms.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     DiagnosisMapper diagnosisMapper;
     @Resource
     UserService userService;
+    @Resource
+    PetService petService;
 
 
     @Override
@@ -31,22 +35,32 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         diagnosis.setPage(begin);
 
         List<Diagnosis> rows = new ArrayList<>();
-
-        for (Diagnosis d: rows){
-            User my = userService.selectByPrimaryKey(d.getUserId());
-            User dt = userService.selectByPrimaryKey(d.getDoctorId());
-            d.setName(my.getName());
-            d.setDoctorName(dt.getName());
-        }
+        List<Diagnosis> resule = new ArrayList<>();
         try {
             rows = diagnosisMapper.getAllByLimit(diagnosis);
             size = diagnosisMapper.countAllByLimit(diagnosis);
+            for (Diagnosis d: rows){
+                if (d.getPetId()!=null){
+                    Pet my = petService.selectByPrimaryKey(d.getPetId());
+                    d.setName(my.getName());
+                }
+                if (d.getUserId()!=null){
+                    User my = userService.selectByPrimaryKey(d.getUserId());
+                    d.setUserName(my.getName());
+                }
+
+                if (d.getDoctorId()!=null){
+                    User dt = userService.selectByPrimaryKey(d.getDoctorId());
+                    d.setDoctorName(dt.getName());
+                }
+                resule.add(d);
+            }
         } catch (Exception e) {
             logger.error("根据条件查询异常", e);
         }
         MMGridPageVoBean<Diagnosis> vo = new MMGridPageVoBean<>();
         vo.setTotal(size);
-        vo.setRows(rows);
+        vo.setRows(resule);
 
         return vo;
     }
