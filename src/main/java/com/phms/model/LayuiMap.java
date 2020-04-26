@@ -3,7 +3,7 @@ package com.phms.model;
 import java.util.HashMap;
 
 /**
- * class name: LayuiMap <BR>
+ * class name: LayuiMap返回模型 <BR>
  * class description: please write your description <BR>
  */
 public class LayuiMap extends HashMap<String, Object> {
@@ -48,6 +48,9 @@ public class LayuiMap extends HashMap<String, Object> {
 		return this;
 	}
 
+	/**
+	 * 返回数据
+	 */
 	public LayuiMap data(Object message) {
 		this.put("data", message);
 		return this;

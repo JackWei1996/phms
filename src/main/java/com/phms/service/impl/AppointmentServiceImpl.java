@@ -20,7 +20,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Object getAllByLimit(Appointment appointment) {
         int size = 0;
-
+        // 计算分页
         Integer begin = (appointment.getPage() - 1) * appointment.getLimit();
         appointment.setPage(begin);
 

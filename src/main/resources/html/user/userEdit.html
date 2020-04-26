@@ -71,7 +71,7 @@ $(function(){
    		$("#phone").val(manageUser.phone);
    		$("#email").val(manageUser.email);
    		$("#idCard").val(manageUser.idCard);
-   		$("#post").val(manageUser.post);
+   		$("#department").val(manageUser.department);
    		$("#address").val(manageUser.address);
    	}
 	//验证数字长度
@@ -202,7 +202,7 @@ function save(){
 	param.email = $.trim($("#email").val());
 	param.idCard = $.trim($("#idCard").val());
 	param.address = $.trim($("#address").val());
-	param.post = $("#post").val();
+	param.department = $("#department").val();
 	
 	var urlStr = "/user/updateUser";
 	if(manageUser){
@@ -275,7 +275,7 @@ function save(){
 					<span class="text_ad_0">职位：</span>
 				</td>
 				<td>
-					<input id="post" type="text" name="post" class="input_0" value="" />
+					<input id="department" type="text" name="department" class="input_0" value="" />
 					<span class="validation_span"></span>
 				</td>
 			</tr>

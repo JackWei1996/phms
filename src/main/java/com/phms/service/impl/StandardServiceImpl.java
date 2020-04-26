@@ -20,7 +20,7 @@ public class StandardServiceImpl implements StandardService {
     @Override
     public Object getAllByLimit(Standard po) {
         int size = 0;
-
+        // 计算分页
         Integer begin = (po.getPage() - 1) * po.getLimit();
         po.setPage(begin);
 

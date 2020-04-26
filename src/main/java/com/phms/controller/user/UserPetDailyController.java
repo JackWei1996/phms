@@ -87,7 +87,7 @@ public class UserPetDailyController {
     }
 
     /**
-     * 插入数据库
+     * 添加页面user/petDailyAdd.html
      */
     @RequestMapping(value = "/add")
     public String addUserPage(Model model) {
@@ -99,10 +99,14 @@ public class UserPetDailyController {
         pet.setLimit(100);
         MMGridPageVoBean<Pet> voBean = (MMGridPageVoBean<Pet>) petService.getAllByLimit(pet);
         List<Pet> rows = voBean.getRows();
+        // 获取到该用户下所有的宠物
         model.addAttribute("pets", rows);
         return "user/petDailyAdd";
     }
 
+    /**
+     * 插入数据库
+     */
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     @Transactional

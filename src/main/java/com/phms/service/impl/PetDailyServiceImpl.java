@@ -24,7 +24,7 @@ public class PetDailyServiceImpl implements PetDailyService {
     @Override
     public Object getAllByLimit(PetDaily po) {
         int size = 0;
-
+        // 计算分页
         Integer begin = (po.getPage() - 1) * po.getLimit();
         po.setPage(begin);
 

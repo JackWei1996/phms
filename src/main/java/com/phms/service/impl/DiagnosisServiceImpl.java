@@ -30,7 +30,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Override
     public Object getAllByLimit(Diagnosis diagnosis) {
         int size = 0;
-
+        // 计算分页
         Integer begin = (diagnosis.getPage() - 1) * diagnosis.getLimit();
         diagnosis.setPage(begin);
 

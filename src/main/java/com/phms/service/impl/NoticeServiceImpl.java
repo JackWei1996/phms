@@ -20,7 +20,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public Object getAllByLimit(Notice po) {
         int size = 0;
-
+        // 计算分页
         Integer begin = (po.getPage() - 1) * po.getLimit();
         po.setPage(begin);
 

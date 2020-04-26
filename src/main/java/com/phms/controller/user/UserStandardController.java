@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
+/**
+ * 监控标准
+ */
 @Controller("UserStandardController")
 @RequestMapping("/user/standard")
 public class UserStandardController {
@@ -25,33 +28,39 @@ public class UserStandardController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * 分类列表页面
+     * 医生列表页面user/standardListDoctor.html
      */
     @RequestMapping("/standardListDoctor")
     public String standardListDoctor() {
         return "user/standardListDoctor";
     }
-
+    /**
+     * 普通用户页面user/standardList.html
+     */
     @RequestMapping("/standardList")
     public String fenleiList() {
         return "user/standardList";
     }
     /**
-     * 返回查询数据
+     * 普通用户返回查询数据
      */
     @RequestMapping("/getAllByLimit")
     @ResponseBody
     public Object getAllByLimit(Standard pojo) {
         return standardService.getAllByLimit(pojo);
     }
-
-
+    /**
+     * 医生返回查询数据
+     */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(Standard pojo) {
         return standardService.getAllByLimit(pojo);
     }
 
+    /**
+     * 根据id删除
+     */
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
@@ -66,11 +75,17 @@ public class UserStandardController {
         }
     }
 
+    /**
+     * 添加页面 user/standardAdd.html
+     */
     @RequestMapping(value = "/add")
     public String addUserPage() {
         return "user/standardAdd";
     }
 
+    /**
+     * 插入数据库
+     */
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     @Transactional
