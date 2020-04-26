@@ -86,12 +86,17 @@ public class UserPetDailyController {
         }
     }
 
+    /**
+     * 插入数据库
+     */
     @RequestMapping(value = "/add")
     public String addUserPage(Model model) {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         Pet pet = new Pet();
         pet.setUserId(user.getId());
+        pet.setPage(1);
+        pet.setLimit(100);
         MMGridPageVoBean<Pet> voBean = (MMGridPageVoBean<Pet>) petService.getAllByLimit(pet);
         List<Pet> rows = voBean.getRows();
         model.addAttribute("pets", rows);

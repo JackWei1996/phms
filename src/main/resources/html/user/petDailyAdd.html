@@ -59,9 +59,10 @@ $(function(){
     console.log(pets);
 
     for(var i=0; i<pets.length; i++){
+        var d = pets[i];
         var newOption = document.createElement("option");
-        newOption.text=i.name;
-        newOption.value=i.id;
+        newOption.text=d.name;
+        newOption.value=d.id;
         document.getElementById("petId").add(newOption);
     }
 
@@ -140,6 +141,12 @@ function save(){
     param.status = $("#status").val();
     param.appetite = $("#appetite").val();
     param.petId = $("#petId").val();
+    console.log(petId);
+    if (!petId){
+        layer.alert('无宠物信息无法增加！', {icon: 2}, function(indexNo){
+            parent.layer.closeAll();
+        });
+    }
 
 	console.log(param);
 	var urlStr = "/user/petDaily/doAdd";
