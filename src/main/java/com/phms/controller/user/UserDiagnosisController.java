@@ -62,9 +62,6 @@ public class UserDiagnosisController {
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(Diagnosis diagnosis) {
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-//        diagnosis.setDoctorId(user.getId());
         return diagnosisService.getAllByLimit(diagnosis);
     }
 

@@ -61,9 +61,6 @@ public class UserApplyController {
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(Appointment appointment) {
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-        appointment.setDoctorId(user.getId());
         return appointmentService.getAllByLimit(appointment);
     }
 
