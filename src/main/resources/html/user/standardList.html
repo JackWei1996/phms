@@ -98,10 +98,7 @@ $(function(){
 						   case '2': t = "犬科";break;
 					   }
 					   return t;
-			   }},{title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>';
-					return "<div class='span_btus' >" + buttonStr + "</div>";
-				}}
+			   }}
            ],
         plugins : [
         	$('#paginator11-1').mmPaginator({
@@ -119,44 +116,4 @@ $(function(){
 function search(){
 	$('#exampleTableUser').mmGrid().load({"page":1});
 }
-
-function addRow(){
-	layer.open({
-	    type: 2,
-	    title: '增加',
-	    area: ['60%', '70%'],
-	    content: '/user/standard/add' //iframe的url
-	});
-}
-
-
-function dontPass(id) {
-	var param = new Object();
-	param.id = id;
-	layer.confirm('确认删除吗？', {icon: 3, title:'提示'}, function(index){
-		$.ajax({
-			type:"POST",
-			async:true,  //默认true,异步
-			data:param,
-			url:"/user/standard/del",
-			success:function(data){
-				console.log(data);
-				if(data == "SUCCESS"){
-					layer.alert('操作成功！', {icon: 1}, function(indexOk){
-						search();
-						layer.closeAll();
-					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
-				}else{
-					layer.alert('操作失败！', {icon: 2}, function(indexNo){
-						layer.closeAll();
-					});
-				}
-			}
-		});
-	});
-}
-
 </script>

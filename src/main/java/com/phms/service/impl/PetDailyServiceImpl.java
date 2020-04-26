@@ -1,7 +1,9 @@
 package com.phms.service.impl;
 
 import com.phms.mapper.PetDailyMapper;
+import com.phms.mapper.PetMapper;
 import com.phms.model.MMGridPageVoBean;
+import com.phms.pojo.Pet;
 import com.phms.pojo.PetDaily;
 import com.phms.service.PetDailyService;
 import org.slf4j.Logger;
@@ -17,6 +19,8 @@ public class PetDailyServiceImpl implements PetDailyService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     PetDailyMapper petDailyMapper;
+    @Resource
+    PetMapper petMapper;
     @Override
     public Object getAllByLimit(PetDaily po) {
         int size = 0;
@@ -27,6 +31,10 @@ public class PetDailyServiceImpl implements PetDailyService {
         List<PetDaily> rows = new ArrayList<>();
         try {
             rows = petDailyMapper.getAllByLimit(po);
+            for (PetDaily p : rows){
+                Pet pet = petMapper.selectByPrimaryKey(p.getPetId());
+                p.setName(pet.getName());
+            }
             size = petDailyMapper.countAllByLimit(po);
         } catch (Exception e) {
             logger.error("根据条件查询异常", e);

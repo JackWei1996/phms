@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
+/**
+ * 宠物健康史
+ */
 @Controller("UserDiagnosisController")
 @RequestMapping("/user/diagnosis")
 public class UserDiagnosisController {
@@ -29,19 +32,21 @@ public class UserDiagnosisController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * 分类列表页面
+     * 医生宠物健康史页面user/diagnosisListDoctor.html
      */
     @RequestMapping("/diagnosisListDoctor")
     public String applyListDoctor() {
         return "user/diagnosisListDoctor";
     }
-
+    /**
+     * 普通用户宠物健康史页面user/diagnosisList.html
+     */
     @RequestMapping("/diagnosisList")
     public String fenleiList() {
         return "user/diagnosisList";
     }
     /**
-     * 返回查询数据
+     * 普通用户返回查询数据
      */
     @RequestMapping("/getAllByLimit")
     @ResponseBody
@@ -51,17 +56,21 @@ public class UserDiagnosisController {
         diagnosis.setUserId(user.getId());
         return diagnosisService.getAllByLimit(diagnosis);
     }
-
-
+    /**
+     * 医生返回查询数据
+     */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(Diagnosis diagnosis) {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
-        diagnosis.setDoctorId(user.getId());
+//        diagnosis.setDoctorId(user.getId());
         return diagnosisService.getAllByLimit(diagnosis);
     }
 
+    /**
+     * 删除记录
+     */
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
@@ -76,6 +85,9 @@ public class UserDiagnosisController {
         }
     }
 
+    /**
+     * 增加页面user/diagnosisAdd.html
+     */
     @RequestMapping(value = "/add")
     public String addUserPage(Long id, Model model) {
         Appointment byId = appointmentService.getById(id);
@@ -84,6 +96,9 @@ public class UserDiagnosisController {
         return "user/diagnosisAdd";
     }
 
+    /**
+     * 插入数据库
+     */
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     @Transactional
@@ -91,6 +106,7 @@ public class UserDiagnosisController {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         try {
+            // 医生登录id
             diagnosis.setDoctorId(user.getId());
             diagnosis.setCreateTime(new Date());
             // 状态:1申请中,2申请通过,3不通过,4已完成
@@ -104,6 +120,9 @@ public class UserDiagnosisController {
         }
     }
 
+    /**
+     * 修改状态
+     */
     @RequestMapping(value = "/chStatus")
     @ResponseBody
     @Transactional
@@ -111,6 +130,7 @@ public class UserDiagnosisController {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         try {
+            // 医生登录id
             diagnosis.setDoctorId(user.getId());
             diagnosisService.update(diagnosis);
             return "SUCCESS";

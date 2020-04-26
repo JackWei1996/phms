@@ -65,6 +65,15 @@ public class PetDaily  extends BaseBean{
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
     private Double appetite;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      *

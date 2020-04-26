@@ -1,5 +1,6 @@
 package com.phms.controller.user;
 
+import com.phms.model.MMGridPageVoBean;
 import com.phms.pojo.Pet;
 import com.phms.pojo.PetDaily;
 import com.phms.pojo.User;
@@ -13,32 +14,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 宠物日志
+ */
 @Controller("UserPetDailyController")
 @RequestMapping("/user/petDaily")
 public class UserPetDailyController {
     @Autowired
     private PetDailyService petDailyService;
+    @Autowired
+    private PetService petService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * 分类列表页面
+     * 医生宠物日志页面user/petDailyListDoctor.html
      */
     @RequestMapping("/petDailyListDoctor")
     public String petListDoctor() {
         return "user/petDailyListDoctor";
     }
 
+    /**
+     * 普通用户宠物日志页面user/petDailyList.html
+     */
     @RequestMapping("/petDailyList")
     public String fenleiList() {
         return "user/petDailyList";
     }
     /**
-     * 返回查询数据
+     * 普通用户返回查询数据
      */
     @RequestMapping("/getAllByLimit")
     @ResponseBody
@@ -49,16 +60,18 @@ public class UserPetDailyController {
         return petDailyService.getAllByLimit(pojo);
     }
 
-
+    /**
+     * 医生返回查询数据
+     */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(PetDaily pojo) {
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-        pojo.setUserId(user.getId());
         return petDailyService.getAllByLimit(pojo);
     }
 
+    /**
+     * 删除
+     */
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
@@ -74,7 +87,14 @@ public class UserPetDailyController {
     }
 
     @RequestMapping(value = "/add")
-    public String addUserPage() {
+    public String addUserPage(Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        Pet pet = new Pet();
+        pet.setUserId(user.getId());
+        MMGridPageVoBean<Pet> voBean = (MMGridPageVoBean<Pet>) petService.getAllByLimit(pet);
+        List<Pet> rows = voBean.getRows();
+        model.addAttribute("pets", rows);
         return "user/petDailyAdd";
     }
 

@@ -6,6 +6,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 文件上传
+ */
 @Configuration
 @PropertySource(value = "classpath:config.properties")
 public class FileConfig implements WebMvcConfigurer {

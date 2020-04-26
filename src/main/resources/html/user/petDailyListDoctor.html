@@ -73,7 +73,7 @@ $(function(){
 			{title: '身高', name: 'height', width:40},
 			{title: '体温', name: 'temperature', width:30},
 			{title: '饭量', name: 'appetite', width:30},
-			{title: '类型', name: 'type', width:100, renderer:function(val, item, rowIndex){
+			{title: '类型', name: 'status', width:100, renderer:function(val, item, rowIndex){
 					var t = "";
 					switch (val) {
 						case 1: t = "正常";break;
@@ -81,10 +81,6 @@ $(function(){
 						case 3: t = "生病";break;
 					}
 					return t;
-				}},
-			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>';
-					return "<div class='span_btus' >" + buttonStr + "</div>";
 				}}
            ],
         plugins : [
@@ -102,39 +98,6 @@ $(function(){
 //查询
 function search(){
 	$('#exampleTableUser').mmGrid().load({"page":1});
-}
-
-function passTo(id) {
-	toStatus(id, 2);
-}
-
-function dontPass(id) {
-	var param = new Object();
-	param.id = id;
-	layer.confirm('确认删除吗？', {icon: 3, title:'提示'}, function(index){
-		$.ajax({
-			type:"POST",
-			async:true,  //默认true,异步
-			data:param,
-			url:"/user/petDaily/del",
-			success:function(data){
-				console.log(data);
-				if(data == "SUCCESS"){
-					layer.alert('操作成功！', {icon: 1}, function(indexOk){
-						search();
-						layer.closeAll();
-					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
-				}else{
-					layer.alert('操作失败！', {icon: 2}, function(indexNo){
-						layer.closeAll();
-					});
-				}
-			}
-		});
-	});
 }
 
 </script>

@@ -3,6 +3,9 @@ package com.phms.common;
 import java.text.*;
 import java.util.Date;
 
+/**
+ * 日期格式化类
+ */
 public class MyDateFormat extends DateFormat {
 
 	private static final long serialVersionUID = 6975510066965751142L;

@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
 
+/**
+ * 文件上传接口
+ */
 @Controller
 public class UploadFileController {
     /**

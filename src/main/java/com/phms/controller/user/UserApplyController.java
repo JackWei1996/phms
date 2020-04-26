@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
+/**
+ * 用户预约
+ */
 @Controller("UserApplyController")
 @RequestMapping("/user/apply")
 public class UserApplyController {
@@ -25,19 +28,24 @@ public class UserApplyController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * 分类列表页面
+     * 医生管理预约页面
+     * user/applyListDoctor.html
      */
     @RequestMapping("/applyListDoctor")
     public String applyListDoctor() {
         return "user/applyListDoctor";
     }
 
+    /**
+     * 普通用户预约页面
+     * user/applyList.html
+     */
     @RequestMapping("/applyList")
     public String fenleiList() {
         return "user/applyList";
     }
     /**
-     * 返回查询数据
+     * 普通用户返回查询数据渲染表格
      */
     @RequestMapping("/getAllByLimit")
     @ResponseBody
@@ -47,8 +55,9 @@ public class UserApplyController {
         appointment.setUserId(user.getId());
         return appointmentService.getAllByLimit(appointment);
     }
-
-
+    /**
+     * 医生角色返回查询数据渲染表格
+     */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(Appointment appointment) {
@@ -58,6 +67,9 @@ public class UserApplyController {
         return appointmentService.getAllByLimit(appointment);
     }
 
+    /**
+     * 根据id删除预约
+     */
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
@@ -72,12 +84,18 @@ public class UserApplyController {
         }
     }
 
+    /**
+     * 添加预约页面 user/applyAdd.html
+     */
     @RequestMapping(value = "/add")
     public String addUserPage(Long id, Model model) {
         model.addAttribute("petId", id);
         return "user/applyAdd";
     }
 
+    /**
+     * 预约信息插入数据库
+     */
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     @Transactional
@@ -85,6 +103,7 @@ public class UserApplyController {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         try {
+            // 当前预约人的id
             appointment.setUserId(user.getId());
             appointment.setCreateTime(new Date());
             // 状态:1申请中,2申请通过,3不通过,4已完成
@@ -98,6 +117,9 @@ public class UserApplyController {
         }
     }
 
+    /**
+     * 改变预约状态
+     */
     @RequestMapping(value = "/chStatus")
     @ResponseBody
     @Transactional

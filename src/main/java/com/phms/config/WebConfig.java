@@ -21,7 +21,7 @@ import java.util.TimeZone;
 
 /**
  * class name:WebConfig <BR>
- * class description: 全局配置文件 <BR>
+ * class description: Web全局配置文件 <BR>
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer{

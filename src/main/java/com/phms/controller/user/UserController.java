@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 用户控制
+ */
 @Controller("User")
 @RequestMapping("/user")
 public class UserController {
@@ -29,11 +32,17 @@ public class UserController {
         this.resultMap = resultMap;
     }
 
+    /**
+     * 返回有权限信息
+     */
     @RequestMapping(value = "/getMessage", method = RequestMethod.GET)
     public ResultMap getMessage() {
         return resultMap.success().message("您拥有用户权限，可以获得该接口的信息！");
     }
 
+    /**
+     * 修改用户信息页面user/userEdit.html
+     */
     @RequestMapping(value = "/editUserPage")
     public String editUserPage(Long userId, Model model) {
         model.addAttribute("manageUser", userId);
@@ -44,6 +53,9 @@ public class UserController {
         return "user/userEdit";
     }
 
+    /**
+     * 更新数据库
+     */
     @ResponseBody
     @RequestMapping("/updateUser")
     public String updateUser(User user) {

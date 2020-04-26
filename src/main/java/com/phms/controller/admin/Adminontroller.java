@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 管理员权限控制类
+ */
 @Controller("Admin")
 @RequestMapping("/admin")
 public class Adminontroller {

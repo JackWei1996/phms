@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
+/**
+ * 用户宠物管理
+ */
 @Controller("UserPetController")
 @RequestMapping("/user/pet")
 public class UserPetController {
@@ -24,19 +27,22 @@ public class UserPetController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * 分类列表页面
+     * 医生管理宠物页面user/petListDoctor.html
      */
     @RequestMapping("/petListDoctor")
     public String petListDoctor() {
         return "user/petListDoctor";
     }
 
+    /**
+     * 普通用户管理宠物页面user/petList.html
+     */
     @RequestMapping("/petList")
     public String fenleiList() {
         return "user/petList";
     }
     /**
-     * 返回查询数据
+     * 普通用户返回查询数据
      */
     @RequestMapping("/getAllByLimit")
     @ResponseBody
@@ -47,16 +53,18 @@ public class UserPetController {
         return petService.getAllByLimit(pojo);
     }
 
-
+    /**
+     * 医生返回查询数据
+     */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
     public Object getAllByLimitBaoJie(Pet pojo) {
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-        pojo.setUserId(user.getId());
         return petService.getAllByLimit(pojo);
     }
 
+    /**
+     * 删除宠物
+     */
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
@@ -74,11 +82,17 @@ public class UserPetController {
         }
     }
 
+    /**
+     * 添加宠物页面user/petAdd.html
+     */
     @RequestMapping(value = "/add")
     public String addUserPage() {
         return "user/petAdd";
     }
 
+    /**
+     * 添加到数据库
+     */
     @RequestMapping(value = "/doAdd")
     @ResponseBody
     @Transactional
@@ -89,22 +103,6 @@ public class UserPetController {
             pojo.setUserId(user.getId());
             pojo.setCreateTime(new Date());
             petService.add(pojo);
-            return "SUCCESS";
-        } catch (Exception e) {
-            logger.error("添加异常", e);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return "ERROR";
-        }
-    }
-
-    @RequestMapping(value = "/chStatus")
-    @ResponseBody
-    @Transactional
-    public String chStatus(Pet pojo) {
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-        try {
-            petService.update(pojo);
             return "SUCCESS";
         } catch (Exception e) {
             logger.error("添加异常", e);

@@ -72,7 +72,8 @@
                 {title: '浏览次数', name: 'viewCount', width:120},
                 {title: '创建时间', name: 'createTime', width:60},
                 {title: '操作', name: 'id', width:80, renderer:function(val, item, rowIndex){
-                        var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="xq('+"\'"+item.id+"\'"+')" >详情</span>';
+                        var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="xq('+"\'"+item.id+"\'"+')" >详情</span>' +
+                            '<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="deleteRowOne('+"\'"+item.id+"\'"+')" >删除</span>';
                         return "<div class='span_btus' >" + buttonStr + "</div>";
                     }}
             ],

@@ -52,7 +52,19 @@ layui.use('laydate', function(){
 	  });
 });
 
+var pets = [[${pets}]];
+
 $(function(){
+    // 渲染下拉框
+    console.log(pets);
+
+    for(var i=0; i<pets.length; i++){
+        var newOption = document.createElement("option");
+        newOption.text=i.name;
+        newOption.value=i.id;
+        document.getElementById("petId").add(newOption);
+    }
+
     $('form').validate({
         debug:true,
         /**//* 设置验证规则 */
@@ -70,6 +82,9 @@ $(function(){
                 required: true
             },
             status: {
+                required: true
+            },
+            petId: {
                 required: true
             }
         },
@@ -89,6 +104,9 @@ $(function(){
             },
             height: {
                 required:"身高不可为空"
+            },
+            petId: {
+                required:"宠物不可为空"
             }
         },
         /**//* 设置验证触发事件 */
@@ -116,11 +134,12 @@ $(function(){
 //保存
 function save(){
 	var param = new Object();
-	param.temperature = $.trim($("#name").val());
+	param.temperature = $.trim($("#temperature").val());
 	param.weight = $.trim($("#weight").val());
 	param.height = $.trim($("#height").val());
-    param.status = $("#type").val();
-    param.appetite = $("#birthday").val();
+    param.status = $("#status").val();
+    param.appetite = $("#appetite").val();
+    param.petId = $("#petId").val();
 
 	console.log(param);
 	var urlStr = "/user/petDaily/doAdd";
@@ -162,6 +181,16 @@ function save(){
 	<div id="adListDiv" align="left" >
 	<form>
 		<table class="form_table" style="border-collapse: collapse;margin-left:20px;margin-top:10px;">
+            <tr>
+                <td align="right" >
+                    <span class="need_0">*</span>
+                    <span class="text_ad_0">宠物：</span>
+                </td>
+                <td>
+                    <select id="petId" name="petId" class="input_0">
+                    </select>
+                </td>
+            </tr>
             <tr>
                 <td align="right" >
                     <span class="need_0">*</span>

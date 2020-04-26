@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 登录控制类
+ */
 @Controller("OpenLogin")
 @RequestMapping()
 public class LoginController {
@@ -36,6 +39,9 @@ public class LoginController {
 
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+	/**
+	 * 返回 尚未登陆信息
+	 */
 	@RequestMapping(value = "/notLogin", method = RequestMethod.GET)
 	@ResponseBody
 	public ResultMap notLogin() {
@@ -43,6 +49,9 @@ public class LoginController {
 		return resultMap.success().message("您尚未登陆！");
 	}
 
+	/**
+	 * 返回 没有权限
+	 */
 	@RequestMapping(value = "/notRole", method = RequestMethod.GET)
 	@ResponseBody
 	public ResultMap notRole() {
@@ -53,7 +62,7 @@ public class LoginController {
 		}
 		return resultMap.success().message("您没有权限！");
 	}
-
+/**演示页面**/
 	@RequestMapping(value = "/demo/table", method = RequestMethod.GET)
 	public String demoTable() {
 		return "table";
@@ -63,7 +72,6 @@ public class LoginController {
 	public String demoTu() {
 		return "tu";
 	}
-
 
 	@RequestMapping(value = "/demo/tu1", method = RequestMethod.GET)
 	public String tu1() {
@@ -79,7 +87,7 @@ public class LoginController {
 	public String tu3() {
 		return "tu3";
 	}
-
+/**演示页面**/
 	/**
 	 * Method name: logout <BR>
 	 * Description: 退出登录 <BR>
@@ -122,11 +130,17 @@ public class LoginController {
 		return "login";
 	}
 
+	/**
+	 * 注册页面 regist.html
+	 */
 	@RequestMapping(value = "/regist")
 	public String regist() {
 		return "regist";
 	}
 
+	/**
+	 * 注册
+	 */
 	@RequestMapping(value = "/doRegist")
 	@ResponseBody
 	public ResultMap doRegist(User user) {
@@ -176,9 +190,7 @@ public class LoginController {
 	/**
 	 * Method name: main <BR>
 	 * Description: 进入主页面 <BR>
-	 * 
-	 * @param model
-	 * @return String<BR>
+	 * index.html
 	 */
 	@RequestMapping(value = "/main")
 	public String main(Model model) {

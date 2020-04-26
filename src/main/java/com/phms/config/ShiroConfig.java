@@ -18,6 +18,9 @@ import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 权限控制
+ */
 @Configuration
 public class ShiroConfig {
 
