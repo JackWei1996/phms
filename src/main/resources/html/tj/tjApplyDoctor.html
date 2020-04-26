@@ -34,29 +34,15 @@
         var dd = new Array();
         dd.push(n[k]);
         for (var i in c){
+            console.log(i);
             for (var s in i){
                 dd.push(i[s]);
             }
         }
-        data.push(dd);
+       data.push(dd);
     }
 
     console.log(data);
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        //年月选择器
-        laydate.render({
-            elem: '#test1'
-            ,type: 'month',
-            value: new Date()
-        });
-        //年月选择器
-        laydate.render({
-            elem: '#test2'
-            ,type: 'month',
-            value: new Date()
-        });
-    });
 
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom);

@@ -56,7 +56,7 @@ public class HealthController {
     }
 
     /**
-     * 预约统计
+     * 普通用户预约统计
      */
     @RequestMapping("/tjApply")
     public String tjApply(Model model) {
@@ -106,7 +106,55 @@ public class HealthController {
     }
 
     /**
-     * 预约统计
+     * 医生预约统计
+     */
+    @RequestMapping("/tjApplyDoctor")
+    public String tjApplyDoctor(Model model) {
+        Appointment appointment = new Appointment();
+        appointment.setPage(1);
+        appointment.setLimit(99999);
+        MMGridPageVoBean<Appointment> voBean = (MMGridPageVoBean<Appointment>)  appointmentService.getAllByLimit(appointment);
+        List<Appointment> rows = voBean.getRows();
+
+        Map<String, String> names = new HashMap<>();
+        Map<String, String> date = new HashMap<>();
+        Map<String, Map<String, Integer>> counts = new HashMap<>();
+
+        for (Appointment a: rows){
+            Pet pet = petService.selectByPrimaryKey(a.getPetId());
+            // 宠物名
+            if (pet!=null){
+                names.put(pet.getId()+"", pet.getName());
+                // 日期
+                String dd = MyUtils.getDate2String(a.getAppTime(), "yyyy-MM-dd");
+                date.put(dd, dd);
+
+                // 次数
+                Map<String, Integer> map = counts.get(pet.getId() + "");
+                if (map == null){
+                    Map<String, Integer> m = new HashMap<>();
+                    m.put(dd, 0);
+                    counts.put(pet.getId() + "", m) ;
+                }else {
+                    Integer i = map.get(dd);
+                    if (i==null){
+                        map.put(dd, 0);
+                    }else {
+                        map.put(dd, i + 1);
+                    }
+                }
+            }
+
+        }
+        model.addAttribute("names", names);
+        model.addAttribute("date", date);
+        model.addAttribute("counts", counts);
+
+        return "tj/tjApplyDoctor";
+    }
+
+    /**
+     * 普通用户宠物日志统计
      */
     @RequestMapping("/tjDaily")
     public String tjDaily(Model model) {
@@ -138,10 +186,61 @@ public class HealthController {
 
         return "tj/tjDaily";
     }
+    /**
+     * 医生宠物日志统计
+     */
+    @RequestMapping("/tjDailyDoctor")
+    public String tjDailyDoctor(Model model) {
+        Pet pet = new Pet();
+        pet.setPage(1);
+        pet.setLimit(99999);
+        MMGridPageVoBean<Pet> voBean = (MMGridPageVoBean<Pet>)  petService.getAllByLimit(pet);
+        List<Pet> rows = voBean.getRows();
 
+        model.addAttribute("pets", rows);
+        if (rows.size()>0){
+            pet = rows.get(0);
+            PetDaily daily = new PetDaily();
+            daily.setPetId(pet.getId());
+            daily.setPage(1);
+            daily.setLimit(99999);
+            MMGridPageVoBean<PetDaily> ppp = (MMGridPageVoBean<PetDaily>)  petDailyService.getAllByLimit(daily);
+            List<PetDaily> list = ppp.getRows();
+
+            for (PetDaily p : list){
+                p.setDateTime(MyUtils.getDate2String(p.getCreateTime(), "yyyy-MM-dd"));
+            }
+
+            model.addAttribute("dailys", list);
+        }
+
+        return "tj/tjDailyDoctor";
+    }
+
+    /**
+     * 普通用户查询条件数据返回宠物日志
+     */
     @RequestMapping("/tjDailyData")
     @ResponseBody
     public Object tjDailyData(Long id){
+        PetDaily daily = new PetDaily();
+        daily.setPetId(id);
+        daily.setPage(1);
+        daily.setLimit(99999);
+        MMGridPageVoBean<PetDaily> ppp = (MMGridPageVoBean<PetDaily>)  petDailyService.getAllByLimit(daily);
+        List<PetDaily> list = ppp.getRows();
+        for (PetDaily p : list){
+            p.setDateTime(MyUtils.getDate2String(p.getCreateTime(), "yyyy-MM-dd"));
+        }
+        return list;
+    }
+
+    /**
+     * 医生查询条件数据返回宠物日志
+     */
+    @RequestMapping("/tjDailyDataDoctor")
+    @ResponseBody
+    public Object tjDailyDataDoctor(Long id){
         PetDaily daily = new PetDaily();
         daily.setPetId(id);
         daily.setPage(1);
