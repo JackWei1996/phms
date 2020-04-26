@@ -15,11 +15,33 @@
 
 <script type="text/javascript" th:inline="javascript">
 
-    var names = [[${names}]];
-    var toDoCounts = [[${zc}]];
-    var outTimeCount = [[${tq}]];
-    var aheadCount = [[${cd}]];
+    var n = [[${names}]];
+    var d = [[${date}]];
+    var c = [[${counts}]];
+    console.log(n);
+    console.log(d);
+    console.log(c);
 
+    var data = new Array();
+    var dates = new Array();
+    dates.push("name");
+    for(var k in d){
+        dates.push(d[k]);
+    }
+    data.push(dates);
+
+    var dd = new Array();
+    for(var k in n){
+        dd.push(n[k]);
+        for (var i in c){
+            for (var s in i){
+                dd.push(i[s]);
+            }
+        }
+    }
+    data.push(dd);
+
+    console.log(data);
     layui.use('laydate', function(){
         var laydate = layui.laydate;
         //年月选择器
@@ -41,31 +63,7 @@
     var app = {};
     option = null;
 
-    function fulshEchart(names, toDoCounts, outTimeCount, aheadCount){
-        var n = new Array();
-        n[0] = "user";
-        for (var i = 0; i <  names.length; i++) {
-            n[i+1] = names[i];
-        }
-
-        var t = new Array();
-        t[0] = "正常签到个数";
-        for (var i = 0; i <  toDoCounts.length; i++) {
-            t[i+1] = toDoCounts[i];
-        }
-
-        var o = new Array();
-        o[0] = "提前签到个数";
-        for (var i = 0; i <  outTimeCount.length; i++) {
-            o[i+1] = outTimeCount[i];
-        }
-
-        var a = new Array();
-        a[0] = "迟到签到个数";
-        for (var i = 0; i <  aheadCount.length; i++) {
-            a[i+1] = aheadCount[i];
-        }
-
+    function fulshEchart(n, d, c){
         setTimeout(function () {
             option = {
                 legend: {},
@@ -74,12 +72,7 @@
                     showContent: false
                 },
                 dataset: {
-                    source: [
-                        n,
-                        o,
-                        a,
-                        t
-                    ]
+                    source: data
                 },
                 xAxis: {type: 'category'},
                 yAxis: {gridIndex: 0},
@@ -98,9 +91,9 @@
                             formatter: '{b}: {@2012} ({d}%)'
                         },
                         encode: {
-                            itemName: 'user',
-                            value: '2012',
-                            tooltip: '2012'
+                            itemName: 'name',
+                            value: '1',
+                            tooltip: '10'
                         }
                     }
                 ]
@@ -128,13 +121,14 @@
             myChart.setOption(option);
 
         });
+
         if (option && typeof option === "object") {
             myChart.setOption(option, true);
         }
     }
 
     $(function(){
-        fulshEchart(names, toDoCounts, outTimeCount, aheadCount);
+        fulshEchart(n, d, c);
     });
 
 </script>

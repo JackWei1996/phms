@@ -61,6 +61,15 @@ public class Appointment extends BaseBean{
     private String info;
     private String phone;
     private String address;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getPhone() {
         return phone;

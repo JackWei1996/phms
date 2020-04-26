@@ -66,6 +66,15 @@ public class PetDaily  extends BaseBean{
      */
     private Double appetite;
     private String name;
+    private String dateTime;
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
 
     public String getName() {
         return name;

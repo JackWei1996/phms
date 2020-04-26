@@ -335,4 +335,14 @@ public class MyUtils {
 		return format.format(date);
 	}
 
+	/**
+	 * 根据日期对象获取yyyy年MM月dd字符串
+	 * @param date
+	 * @return
+	 */
+	public static String getDate2String(Date date, String f) {
+		Format format = new SimpleDateFormat(f);
+		return format.format(date);
+	}
+
 }
