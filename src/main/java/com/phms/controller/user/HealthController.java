@@ -57,4 +57,13 @@ public class HealthController {
     public Object getAllByLimit(Long id, Model model) {
         return null;
     }
+
+    /**
+     * 预约统计
+     */
+    @RequestMapping("/tjApply")
+    @ResponseBody
+    public Object tjApply( Model model) {
+        return null;
+    }
 }

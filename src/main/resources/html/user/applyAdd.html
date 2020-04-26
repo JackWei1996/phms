@@ -137,9 +137,10 @@ function save(){
        			    	parent.$("#add_iframe").hide();
        			    	parent.layer.closeAll();
        				});
-    			}else if(data == "LGINOUT"){
-    				//重新登录
-    				parent.window.location.href = "/logout";    				
+    			}else if(data == "noPetId"){
+                    layer.alert('没有选中宠物！', {icon: 2}, function(indexNo){
+                        parent.layer.closeAll();
+                    });
     			}else{
     				layer.alert('保存失败！', {icon: 2}, function(indexNo){
     					parent.layer.closeAll();

@@ -99,6 +99,9 @@ public class UserApplyController {
     public String doAdd(Appointment appointment) {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
+        if (appointment.getPetId() == null){
+            return "noPetId";
+        }
         try {
             // 当前预约人的id
             appointment.setUserId(user.getId());
