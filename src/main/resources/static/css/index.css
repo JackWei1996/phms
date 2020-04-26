@@ -36,7 +36,7 @@ html, body{
 }
 
 #leftMenu{
-  background-color: #9AE2ED;
+  background-color: #72C1BB;
 
 }
 
@@ -44,7 +44,7 @@ html, body{
 	width: 170px;
 	height: 40px;
 	border-collapse: collapse;
-	background-color: #9AE2ED;
+	background-color: #72C1BB;
 	cursor: pointer;
 	margin-bottom: 2px;
 }
@@ -65,7 +65,7 @@ html, body{
 }
 
 #leftMenu .index_menu_level_0{
-	background-color: #9AE2ED;
+	background-color: #72C1BB;
 }
 
 .index_menu_level_1{
