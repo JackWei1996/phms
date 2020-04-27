@@ -42,13 +42,45 @@
 
 <script type="text/javascript"  th:inline="javascript">
 
-layui.use('laydate', function(){
+layui.use(['laydate','upload'], function(){
 	  var laydate = layui.laydate;
-	  
+	  var upload = layui.upload;
+
 	  //执行一个laydate实例
 	  laydate.render({
 	    elem: '#userBirthday' //指定元素
 	  });
+
+	console.log(upload);
+	//普通图片上传
+	var uploadInst = upload.render({
+		elem: '#test1'
+		,multiple: true
+		,url: '/layuiUpload' //改成您自己的上传接口
+		,before: function(obj){
+			console.log(obj);
+			//预读本地文件示例，不支持ie8
+			obj.preview(function(index, file, result){
+				$('#demo1').attr('src', result); //图片链接（base64）
+			});
+		}
+		,done: function(res){
+			console(res);
+			//如果上传失败
+			if(res.code > 0){
+				return layer.msg('上传失败');
+			}
+			//上传成功
+		}
+		,error: function(){
+			//演示失败状态，并实现重传
+			var demoText = $('#demoText');
+			demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+			demoText.find('.demo-reload').on('click', function(){
+				uploadInst.upload();
+			});
+		}
+	});
 });
 
 function getTime(val){
@@ -239,6 +271,17 @@ function save(){
 	<div id="adListDiv" align="left" >
 	<form>
 		<table class="form_table" style="border-collapse: collapse;margin-left:20px;margin-top:10px;">
+			<tr>
+				<td align="right">
+					<div class="layui-upload">
+						<button type="button" class="layui-btn" id="test1">上传图片</button>
+						<div class="layui-upload-list">
+							<img class="layui-upload-img" id="demo1" width="100px" height="100px">
+							<p id="demoText"></p>
+						</div>
+					</div>
+				</td>
+			</tr>
 			<tr>
 				<td align="right" >
 					<span class="need_0">*</span>
