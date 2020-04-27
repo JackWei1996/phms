@@ -35,14 +35,20 @@ public class UserDiagnosisController {
      * 医生宠物健康史页面user/diagnosisListDoctor.html
      */
     @RequestMapping("/diagnosisListDoctor")
-    public String applyListDoctor() {
+    public String diagnosisListDoctor(Long petId, Model model) {
+        if (petId!=null){
+            model.addAttribute("petId", petId);
+        }
         return "user/diagnosisListDoctor";
     }
     /**
      * 普通用户宠物健康史页面user/diagnosisList.html
      */
     @RequestMapping("/diagnosisList")
-    public String fenleiList() {
+    public String diagnosisList(Long petId, Model model) {
+        if (petId!=null){
+            model.addAttribute("petId", petId);
+        }
         return "user/diagnosisList";
     }
     /**
@@ -71,7 +77,7 @@ public class UserDiagnosisController {
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
-    public String delUser(Long id) {
+    public String del(Long id) {
         try {
             diagnosisService.deleteById(id);
             return "SUCCESS";
@@ -86,7 +92,7 @@ public class UserDiagnosisController {
      * 增加页面user/diagnosisAdd.html
      */
     @RequestMapping(value = "/add")
-    public String addUserPage(Long id, Model model) {
+    public String add(Long id, Model model) {
         Appointment byId = appointmentService.getById(id);
         model.addAttribute("userId", byId.getUserId());
         model.addAttribute("petId", byId.getPetId());

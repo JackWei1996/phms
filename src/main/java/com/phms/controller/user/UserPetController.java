@@ -38,7 +38,7 @@ public class UserPetController {
      * 普通用户管理宠物页面user/petList.html
      */
     @RequestMapping("/petList")
-    public String fenleiList() {
+    public String petList() {
         return "user/petList";
     }
     /**
@@ -58,7 +58,7 @@ public class UserPetController {
      */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
-    public Object getAllByLimitBaoJie(Pet pojo) {
+    public Object getAllByLimitDoctor(Pet pojo) {
         return petService.getAllByLimit(pojo);
     }
 
@@ -68,7 +68,7 @@ public class UserPetController {
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
-    public String delUser(Long id, Long type) {
+    public String del(Long id, Long type) {
         if (type!=null && type ==2){
             return "app";
         }
@@ -86,7 +86,7 @@ public class UserPetController {
      * 添加宠物页面user/petAdd.html
      */
     @RequestMapping(value = "/add")
-    public String addUserPage() {
+    public String add() {
         return "user/petAdd";
     }
 

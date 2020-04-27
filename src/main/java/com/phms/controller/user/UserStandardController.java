@@ -38,7 +38,7 @@ public class UserStandardController {
      * 普通用户页面user/standardList.html
      */
     @RequestMapping("/standardList")
-    public String fenleiList() {
+    public String standardList() {
         return "user/standardList";
     }
     /**
@@ -64,7 +64,7 @@ public class UserStandardController {
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
-    public String delUser(Long id) {
+    public String del(Long id) {
         try {
             standardService.deleteById(id);
             return "SUCCESS";
@@ -79,7 +79,7 @@ public class UserStandardController {
      * 添加页面 user/standardAdd.html
      */
     @RequestMapping(value = "/add")
-    public String addUserPage() {
+    public String add() {
         return "user/standardAdd";
     }
 

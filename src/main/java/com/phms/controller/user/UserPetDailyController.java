@@ -37,7 +37,10 @@ public class UserPetDailyController {
      * 医生宠物日志页面user/petDailyListDoctor.html
      */
     @RequestMapping("/petDailyListDoctor")
-    public String petListDoctor() {
+    public String petListDoctor(Long petId, Model model) {
+        if (petId!=null){
+            model.addAttribute("petId", petId);
+        }
         return "user/petDailyListDoctor";
     }
 
@@ -45,7 +48,10 @@ public class UserPetDailyController {
      * 普通用户宠物日志页面user/petDailyList.html
      */
     @RequestMapping("/petDailyList")
-    public String petDailyList() {
+    public String petDailyList(Long petId, Model model) {
+        if (petId!=null){
+            model.addAttribute("petId", petId);
+        }
         return "user/petDailyList";
     }
     /**
@@ -75,7 +81,7 @@ public class UserPetDailyController {
     @RequestMapping(value = "/del")
     @ResponseBody
     @Transactional
-    public String delUser(Long id) {
+    public String del(Long id) {
         try {
             petDailyService.deleteById(id);
             return "SUCCESS";
@@ -90,7 +96,7 @@ public class UserPetDailyController {
      * 添加页面user/petDailyAdd.html
      */
     @RequestMapping(value = "/add")
-    public String addUserPage(Model model) {
+    public String add(Model model) {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         Pet pet = new Pet();

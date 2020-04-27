@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
 
-
+	var petId = [[${petId}]];
 $(function(){	
 	//表格
 	$('#exampleTableUser').mmGrid({
@@ -67,6 +67,7 @@ $(function(){
         params:function(){
         	var param = new Object();
         	param.name = $.trim($("#name").val());
+			param.petId = petId;
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},

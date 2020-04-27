@@ -59,7 +59,7 @@ public class UserNoticeController {
      * 医生发布指南页面/user/word.html
      */
     @RequestMapping("/publish")
-    public String delUserPage() {
+    public String publish() {
         return "/user/word";
     }
 
