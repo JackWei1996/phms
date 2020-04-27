@@ -399,7 +399,7 @@
     </where>
   </select>
 
-  <select id="countAllByLimit" resultType="map">
+  <select id="getFreeTimeById" resultType="map">
         SELECT df, c
         FROM (SELECT
         date_format( date_add( #{s}, INTERVAL + t.help_topic_id HOUR ), '%y-%m-%d %H' ) AS 'df'

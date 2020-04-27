@@ -70,11 +70,11 @@ $(function(){
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
-			   {title: '名称', name: 'name', width:40},
-			   {title: '体重', name: 'weight', width:40},
-			   {title: '身高', name: 'height', width:40},
+			   {title: '名称', name: 'name', width:20},
+			   {title: '体重(Kg)', name: 'weight', width:10},
+			   {title: '身高(cm)', name: 'height', width:10},
 			   {title: '出生时间', name: 'birthday', width:30},
-			   {title: '类型', name: 'type', width:100, renderer:function(val, item, rowIndex){
+			   {title: '类型', name: 'type', width:20, renderer:function(val, item, rowIndex){
 			   			console.log(val);
 					   console.log(item);
 					   var t = "";
@@ -83,7 +83,7 @@ $(function(){
 						   case '2': t = "犬科";break;
 					   }
 					   return t;
-			   }},{title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
+			   }},{title: '操作', name: 'id', width:60, renderer:function(val, item, rowIndex){
 					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>'+
 							'<span class=" layui-btn layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+", 2"+')" >预约就诊</span>'+
 							'<span class=" layui-btn layui-btn-sm" onclick="bl('+"\'"+item.id+"\'"+", 3"+')" >查看病例</span>';
@@ -128,7 +128,7 @@ function bl(id) {
 	layer.open({
 		type: 2,
 		title: '病例详情',
-		area: ['80%', '70%'],
+		area: ['95%', '60%'],
 		content: '/user/diagnosis/diagnosisList?petId='+id //iframe的url
 	});
 }

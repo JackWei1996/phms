@@ -68,11 +68,11 @@ $(function(){
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
-			{title: '名称', name: 'name', width:40},
-			{title: '体重', name: 'weight', width:40},
-			{title: '身高', name: 'height', width:40},
+			{title: '名称', name: 'name', width:30},
+			{title: '体重(Kg)', name: 'weight', width:10},
+			{title: '身高(cm)', name: 'height', width:10},
 			{title: '出生时间', name: 'birthday', width:30},
-			{title: '类型', name: 'type', width:100, renderer:function(val, item, rowIndex){
+			{title: '类型', name: 'type', width:10, renderer:function(val, item, rowIndex){
 					//状态:1申请中,2申请通过,3不通过,4已完成
 					var t = "";
 					switch (val) {
@@ -81,7 +81,7 @@ $(function(){
 					}
 					return t;
 				}},
-			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
+			  {title: '操作', name: 'id', width:60, renderer:function(val, item, rowIndex){
 					var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+", 3"+')" >查看病例</span>'+
 							'<span class=" layui-btn layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+", 4"+')" >查看日志</span>';
 					return "<div class='span_btus' >" + buttonStr + "</div>";
@@ -113,14 +113,14 @@ function dontPass(id, type) {
 		layer.open({
 			type: 2,
 			title: '病例详情',
-			area: ['80%', '70%'],
+			area: ['95%', '60%'],
 			content: '/user/diagnosis/diagnosisList?petId'+id //iframe的url
 		});
 	}else if (type==4){
 		layer.open({
 			type: 2,
 			title: '日志详情',
-			area: ['80%', '70%'],
+			area: ['95%', '60%'],
 			content: '/user/petDaily/petDailyList?petId'+id  //iframe的url
 		});
 	}
