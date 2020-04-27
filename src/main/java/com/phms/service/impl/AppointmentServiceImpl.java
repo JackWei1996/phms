@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -56,5 +57,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Appointment getById(Long id) {
         return appointmentMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Map<String, Integer> getFreeTimeById(Long docId, String s) {
+        return appointmentMapper.getFreeTimeById(docId, s);
     }
 }

@@ -411,4 +411,11 @@ public class UserServiceImpl implements UserService {
 	public User getByIdCard(String idCard) {
 		return userMapper.selectByIdCard(idCard);
 	}
+
+	@Override
+	public List<User> listDoctor() {
+		UserExample example = new UserExample();
+		example.createCriteria().andDepartmentIsNotNull();
+		return userMapper.selectByExample(example);
+	}
 }

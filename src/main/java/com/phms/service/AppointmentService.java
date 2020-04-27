@@ -2,6 +2,8 @@ package com.phms.service;
 
 import com.phms.pojo.Appointment;
 
+import java.util.Map;
+
 public interface AppointmentService {
     Object getAllByLimit(Appointment appointment);
 
@@ -12,4 +14,6 @@ public interface AppointmentService {
     void update(Appointment appointment);
 
     Appointment getById(Long id);
+
+    Map<String, Integer> getFreeTimeById(Long docId, String s);
 }

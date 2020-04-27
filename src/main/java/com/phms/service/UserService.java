@@ -46,4 +46,6 @@ public interface UserService {
     void save(User user);
 
 	User getByIdCard(String idCard);
+
+    List<User> listDoctor();
 }

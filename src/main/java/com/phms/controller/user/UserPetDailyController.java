@@ -45,7 +45,7 @@ public class UserPetDailyController {
      * 普通用户宠物日志页面user/petDailyList.html
      */
     @RequestMapping("/petDailyList")
-    public String fenleiList() {
+    public String petDailyList() {
         return "user/petDailyList";
     }
     /**
@@ -65,7 +65,7 @@ public class UserPetDailyController {
      */
     @RequestMapping("/getAllByLimitDoctor")
     @ResponseBody
-    public Object getAllByLimitBaoJie(PetDaily pojo) {
+    public Object getAllByLimitDoctor(PetDaily pojo) {
         return petDailyService.getAllByLimit(pojo);
     }
 

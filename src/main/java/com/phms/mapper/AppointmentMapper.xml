@@ -398,4 +398,21 @@
       </if>
     </where>
   </select>
+
+  <select id="countAllByLimit" resultType="map">
+        SELECT df, c
+        FROM (SELECT
+        date_format( date_add( #{s}, INTERVAL + t.help_topic_id HOUR ), '%y-%m-%d %H' ) AS 'df'
+        FROM
+        mysql.help_topic t
+        WHERE
+        t.help_topic_id &lt;= 23 ) as dts
+        LEFT JOIN (SELECT  DATE_FORMAT(a.app_time, '%y-%m-%d %H') dfc, count(0) c
+        FROM appointment a
+        WHERE a.status &gt; 1
+        and doctor_id = #{id}
+        GROUP BY dfc) as ps
+        ON ps.dfc = dts.df
+        ORDER BY dts.df
+  </select>
 </mapper>

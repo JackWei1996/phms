@@ -3,6 +3,8 @@ package com.phms.controller.user;
 import com.phms.pojo.Appointment;
 import com.phms.pojo.User;
 import com.phms.service.AppointmentService;
+import com.phms.service.UserService;
+import com.phms.utils.MyUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -15,7 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户预约
@@ -25,6 +30,8 @@ import java.util.Date;
 public class UserApplyController {
     @Autowired
     private AppointmentService appointmentService;
+    @Autowired
+    private UserService userService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
@@ -32,7 +39,10 @@ public class UserApplyController {
      * user/applyListDoctor.html
      */
     @RequestMapping("/applyListDoctor")
-    public String applyListDoctor() {
+    public String applyListDoctor(Long petId, Model model) {
+        if (petId!=null){
+            model.addAttribute("petId", petId);
+        }
         return "user/applyListDoctor";
     }
 
@@ -41,7 +51,10 @@ public class UserApplyController {
      * user/applyList.html
      */
     @RequestMapping("/applyList")
-    public String fenleiList() {
+    public String applyList(Long petId, Model model) {
+        if (petId!=null){
+            model.addAttribute("petId", petId);
+        }
         return "user/applyList";
     }
     /**
@@ -141,5 +154,37 @@ public class UserApplyController {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return "ERROR";
         }
+    }
+
+    /**
+     * 用户查看医生空闲时间
+     */
+    @RequestMapping(value = "/freeTime")
+    public String freeTime(Model model) {
+        List<User> doctors = userService.listDoctor();
+        model.addAttribute("doctors", doctors);
+
+        Long docId = doctors.get(0).getId();
+        String nowDateYMD = MyUtils.getNowDateYMD();
+
+        Map<String, Integer> map = appointmentService.getFreeTimeById(docId, nowDateYMD+MyUtils.START_HOUR);
+        List<String> time = new ArrayList<>();
+        List<Integer> value = new ArrayList<>();
+
+
+        for(Map.Entry<String, Integer> a:map.entrySet()){
+            time.add(a.getKey());
+            Integer v = a.getValue();
+            if (v==null){
+                value.add(0);
+            }else {
+                value.add(v);
+            }
+        }
+
+        model.addAttribute("time", time);
+        model.addAttribute("value", value);
+
+        return "user/freeTime";
     }
 }

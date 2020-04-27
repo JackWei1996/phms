@@ -14,7 +14,8 @@ import java.util.Date;
  * class name:MyUtils <BR>
  */
 public class MyUtils {
-
+	public static String START_HOUR = " 00:00:00";
+	public static String END_HOUR = " 23:59:59";
 
 	private MyUtils() {
 		throw new IllegalStateException("Utility class");

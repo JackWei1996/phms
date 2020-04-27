@@ -82,7 +82,8 @@ $(function(){
 					return t;
 				}},
 			  {title: '操作', name: 'id', width:40, renderer:function(val, item, rowIndex){
-					var buttonStr ='<span class=" layui-btn layui-btn-danger layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+')" >删除</span>';
+					var buttonStr ='<span class=" layui-btn layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+", 3"+')" >查看病例</span>'+
+							'<span class=" layui-btn layui-btn-sm" onclick="dontPass('+"\'"+item.id+"\'"+", 4"+')" >查看日志</span>';
 					return "<div class='span_btus' >" + buttonStr + "</div>";
 				}}
            ],
@@ -107,37 +108,22 @@ function passTo(id) {
 	toStatus(id, 2);
 }
 
-function dontPass(id) {
-	var param = new Object();
-	param.id = id;
-	layer.confirm('确认删除吗？', {icon: 3, title:'提示'}, function(index){
-		$.ajax({
-			type:"POST",
-			async:true,  //默认true,异步
-			data:param,
-			url:"/user/pet/del",
-			success:function(data){
-				console.log(data);
-				if(data == "SUCCESS"){
-					layer.alert('操作成功！', {icon: 1}, function(indexOk){
-						search();
-						layer.closeAll();
-					});
-				}else if(data == "LGINOUT"){
-					//重新登录
-					window.location.href = "/logout";
-				}else{
-					layer.alert('操作失败！', {icon: 2}, function(indexNo){
-						layer.closeAll();
-					});
-				}
-			}
+function dontPass(id, type) {
+	if (type==3){
+		layer.open({
+			type: 2,
+			title: '病例详情',
+			area: ['60%', '70%'],
+			content: '/user/pet/diagnosisList?id'+id //iframe的url
 		});
-	});
-}
-
-function finish(id) {
-	toStatus(id, 4);
+	}else if (type==4){
+		layer.open({
+			type: 2,
+			title: '日志详情',
+			area: ['60%', '70%'],
+			content: '/user/pet/add?id'+id  //iframe的url
+		});
+	}
 }
 
 function toStatus(id, s) {

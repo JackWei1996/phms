@@ -5,6 +5,7 @@ import com.phms.pojo.AppointmentExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AppointmentMapper {
     /**
@@ -98,4 +99,6 @@ public interface AppointmentMapper {
     List<Appointment> getAllByLimit(Appointment appointment);
 
     int countAllByLimit(Appointment appointment);
+
+    Map<String, Integer> getFreeTimeById(@Param("id") Long id, @Param("s") String s);
 }
