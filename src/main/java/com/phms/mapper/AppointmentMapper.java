@@ -100,5 +100,5 @@ public interface AppointmentMapper {
 
     int countAllByLimit(Appointment appointment);
 
-    Map<String, Integer> getFreeTimeById(@Param("id") Long id, @Param("s") String s);
+    List<Map<String, Object>> getFreeTimeById(@Param("id") Long id, @Param("s") String s);
 }

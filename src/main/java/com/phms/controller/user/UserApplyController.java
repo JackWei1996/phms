@@ -17,10 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 用户预约
@@ -165,18 +162,19 @@ public class UserApplyController {
         model.addAttribute("doctors", doctors);
 
         Long docId = doctors.get(0).getId();
+        model.addAttribute("docName", doctors.get(0).getName());
         String nowDateYMD = MyUtils.getNowDateYMD();
 
-        Map<String, Integer> map = appointmentService.getFreeTimeById(docId, nowDateYMD+MyUtils.START_HOUR);
+        List<Map<String, Object>> map = appointmentService.getFreeTimeById(docId, nowDateYMD+MyUtils.START_HOUR);
         List<String> time = new ArrayList<>();
-        List<Integer> value = new ArrayList<>();
+        List<Long> value = new ArrayList<>();
 
-
-        for(Map.Entry<String, Integer> a:map.entrySet()){
-            time.add(a.getKey());
-            Integer v = a.getValue();
-            if (v==null){
-                value.add(0);
+        for (Map<String, Object> m : map){
+            String df = (String) m.get("df");
+            time.add(df);
+            Long v = (Long) m.get("c");
+            if (v == null) {
+                value.add(0L);
             }else {
                 value.add(v);
             }
@@ -185,6 +183,31 @@ public class UserApplyController {
         model.addAttribute("time", time);
         model.addAttribute("value", value);
 
-        return "user/freeTime";
+        return "tj/freeTime";
+    }
+
+    @RequestMapping(value = "/getFreeTime")
+    @ResponseBody
+    public Object getFreeTime(Long id, String date) {
+        User doctors = userService.selectByPrimaryKey(id);
+        Map<String, Object> result = new HashMap<>();
+        result.put("n", doctors.getName());
+        List<Map<String, Object>> map = appointmentService.getFreeTimeById(id, date+MyUtils.START_HOUR);
+        List<String> time = new ArrayList<>();
+        List<Long> value = new ArrayList<>();
+
+        for (Map<String, Object> m : map){
+            String df = (String) m.get("df");
+            time.add(df+"点");
+            Long v = (Long) m.get("c");
+            if (v == null) {
+                value.add(0L);
+            }else {
+                value.add(v);
+            }
+        }
+        result.put("t", time);
+        result.put("v", value);
+        return result;
     }
 }

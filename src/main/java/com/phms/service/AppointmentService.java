@@ -2,6 +2,7 @@ package com.phms.service;
 
 import com.phms.pojo.Appointment;
 
+import java.util.List;
 import java.util.Map;
 
 public interface AppointmentService {
@@ -15,5 +16,5 @@ public interface AppointmentService {
 
     Appointment getById(Long id);
 
-    Map<String, Integer> getFreeTimeById(Long docId, String s);
+    List<Map<String, Object>> getFreeTimeById(Long docId, String s);
 }

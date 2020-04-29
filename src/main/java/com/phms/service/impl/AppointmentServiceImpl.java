@@ -60,7 +60,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Map<String, Integer> getFreeTimeById(Long docId, String s) {
+    public List<Map<String, Object>> getFreeTimeById(Long docId, String s) {
         return appointmentMapper.getFreeTimeById(docId, s);
     }
 }

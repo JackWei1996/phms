@@ -78,23 +78,23 @@ public class HealthController {
             // 宠物名
             if (pet!=null){
                 names.put(pet.getId()+"", pet.getName());
-                // 日期
-                String dd = MyUtils.getDate2String(a.getAppTime(), "yyyy-MM-dd");
-                date.put(dd, dd);
+            }
+            // 日期
+            String dd = MyUtils.getDate2String(a.getAppTime(), "yyyy-MM-dd");
+            date.put(dd, dd);
 
-                // 次数
-                Map<String, Integer> map = counts.get(pet.getId() + "");
-                if (map == null){
-                    Map<String, Integer> m = new HashMap<>();
-                    m.put(dd, 0);
-                    counts.put(pet.getId() + "", m) ;
+            // 次数
+            Map<String, Integer> map = counts.get(pet.getId() + "");
+            if (map == null){
+                Map<String, Integer> m = new HashMap<>();
+                m.put(dd, 0);
+                counts.put(pet.getId() + "", m) ;
+            }else {
+                Integer i = map.get(dd);
+                if (i==null){
+                    map.put(dd, 0);
                 }else {
-                    Integer i = map.get(dd);
-                    if (i==null){
-                        map.put(dd, 0);
-                    }else {
-                        map.put(dd, i + 1);
-                    }
+                    map.put(dd, i + 1);
                 }
             }
         }
