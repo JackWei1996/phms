@@ -40,6 +40,8 @@ public class UserPetDailyController {
     public String petListDoctor(Long petId, Model model) {
         if (petId!=null){
             model.addAttribute("petId", petId);
+        }else {
+            model.addAttribute("petId", "petId");
         }
         return "user/petDailyListDoctor";
     }
@@ -51,6 +53,8 @@ public class UserPetDailyController {
     public String petDailyList(Long petId, Model model) {
         if (petId!=null){
             model.addAttribute("petId", petId);
+        }else {
+            model.addAttribute("petId", "petId");
         }
         return "user/petDailyList";
     }

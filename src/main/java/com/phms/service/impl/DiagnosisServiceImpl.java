@@ -42,16 +42,23 @@ public class DiagnosisServiceImpl implements DiagnosisService {
             for (Diagnosis d: rows){
                 if (d.getPetId()!=null){
                     Pet my = petService.selectByPrimaryKey(d.getPetId());
-                    d.setName(my.getName());
+                    if (my !=null){
+                        d.setName(my.getName());
+                    }
+
                 }
                 if (d.getUserId()!=null){
                     User my = userService.selectByPrimaryKey(d.getUserId());
-                    d.setUserName(my.getName());
+                    if (my != null) {
+                        d.setUserName(my.getName());
+                    }
                 }
 
                 if (d.getDoctorId()!=null){
                     User dt = userService.selectByPrimaryKey(d.getDoctorId());
-                    d.setDoctorName(dt.getName());
+                    if (dt != null) {
+                        d.setDoctorName(dt.getName());
+                    }
                 }
                 resule.add(d);
             }

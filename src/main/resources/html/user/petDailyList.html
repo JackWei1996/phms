@@ -67,8 +67,10 @@ $(function(){
         params:function(){
         	var param = new Object();
         	param.name = $.trim($("#name").val());
-			param.petId = petId;
-        	return param;
+			if (petId!='petId'){
+				param.petId = petId;
+			}
+			return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
 			   {title: '名称', name: 'name', width:40},

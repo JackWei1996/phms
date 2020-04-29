@@ -38,6 +38,8 @@ public class UserDiagnosisController {
     public String diagnosisListDoctor(Long petId, Model model) {
         if (petId!=null){
             model.addAttribute("petId", petId);
+        }else {
+            model.addAttribute("petId", "petId");
         }
         return "user/diagnosisListDoctor";
     }
@@ -48,6 +50,8 @@ public class UserDiagnosisController {
     public String diagnosisList(Long petId, Model model) {
         if (petId!=null){
             model.addAttribute("petId", petId);
+        }else {
+            model.addAttribute("petId", "petId");
         }
         return "user/diagnosisList";
     }

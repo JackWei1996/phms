@@ -65,7 +65,9 @@ $(function(){
         params:function(){
         	var param = new Object();
         	param.info = $.trim($("#info").val());
-        	param.petId = petId;
+        	if (petId!='petId'){
+				param.petId = petId;
+			}
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},
