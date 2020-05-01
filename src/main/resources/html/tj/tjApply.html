@@ -14,86 +14,55 @@
 </html>
 
 <script type="text/javascript" th:inline="javascript">
-
-    var n = [[${names}]];
-    var d = [[${date}]];
-    var c = [[${counts}]];
-    console.log(n);
-    console.log(d);
-    console.log(c);
-
-    var data = new Array();
-    var dates = new Array();
-    dates.push("name");
-    for(var k in d){
-        dates.push(d[k]);
-    }
-    data.push(dates);
-
-    for(var k in n){
-        var dd = new Array();
-        dd.push(n[k]);
-        for (var i in c){
-            for (var s in i){
-                dd.push(i[s]);
-            }
-        }
-        data.push(dd);
-    }
-
-    console.log(data);
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        //年月选择器
-        laydate.render({
-            elem: '#test1'
-            ,type: 'month',
-            value: new Date()
-        });
-        //年月选择器
-        laydate.render({
-            elem: '#test2'
-            ,type: 'month',
-            value: new Date()
-        });
-    });
+    var a1 = [[${a1}]];
+    var a2 = [[${a2}]];
+    var a3 = [[${a3}]];
+    var a4 = [[${a4}]];
 
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom);
     var app = {};
     option = null;
 
-    function fulshEchart(n, d, c){
+    function fulshEchart(a1, a2, a3, a4){
+        console.log(a1);
+        console.log(a2);
+        console.log(a3);
+        console.log(a4);
         setTimeout(function () {
             option = {
-                legend: {},
+                title: {
+                    text: '预约状态数量统计',
+                    subtext: '根据预约状态数量进行统计,体现医院整体办事效率',
+                    left: 'center'
+                },
                 tooltip: {
-                    trigger: 'axis',
-                    showContent: false
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
                 },
-                dataset: {
-                    source: data
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['不通过', '申请中', '申请通过', '已完成']
                 },
-                xAxis: {type: 'category'},
-                yAxis: {gridIndex: 0},
-                grid: {top: '55%'},
                 series: [
-                    {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                    {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                    {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-                    {type: 'line', smooth: true, seriesLayoutBy: 'row'},
                     {
+                        name: '类型',
                         type: 'pie',
-                        id: 'pie',
-                        radius: '30%',
-                        center: ['50%', '25%'],
-                        label: {
-                            formatter: '{b}: {@2012} ({d}%)'
-                        },
-                        encode: {
-                            itemName: 'name',
-                            value: '1',
-                            tooltip: '10'
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: [
+                            {value: a3, name: '不通过'},
+                            {value: a1, name: '申请中'},
+                            {value: a2, name: '申请通过'},
+                            {value: a4, name: '已完成'}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
                         }
                     }
                 ]
@@ -128,7 +97,7 @@
     }
 
     $(function(){
-        fulshEchart(n, d, c);
+        fulshEchart( a1, a2, a3, a4);
     });
 
 </script>

@@ -423,7 +423,10 @@
         AND status = #{status}
       </if>
       <if test="type !=null and type!=''">
-        type = #{type}
+        AND type = #{type}
+      </if>
+      <if test="ageMax !=null">
+        AND (age_min &lt;=#{ageMax} OR age_max &gt;=#{ageMax})
       </if>
     </where>
     ORDER BY id DESC
@@ -442,7 +445,7 @@
         AND status = #{status}
       </if>
       <if test="type !=null and type!=''">
-        type = #{type}
+        AND type = #{type}
       </if>
     </where>
   </select>

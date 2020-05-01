@@ -37,7 +37,7 @@ public class PetDaily  extends BaseBean{
      *
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
-    private Long temperature;
+    private Double temperature;
 
     /**
      *
@@ -182,7 +182,7 @@ public class PetDaily  extends BaseBean{
      *
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
-    public Long getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
@@ -194,7 +194,7 @@ public class PetDaily  extends BaseBean{
      *
      * @mbg.generated Mon Apr 06 17:03:33 CST 2020
      */
-    public void setTemperature(Long temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 

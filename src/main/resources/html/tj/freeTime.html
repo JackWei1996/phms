@@ -101,7 +101,7 @@
             async:false,  //默认true,异步
             data:{"id":id, "date":ckTime},
             dataType:'json',
-            url:"/user/apply/getFreeTime",
+            url:"/health/getFreeTime",
             success:function(data){
                 fulshEchart(data.n, data.v, data.t);
             },
