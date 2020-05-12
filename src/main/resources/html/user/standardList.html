@@ -29,8 +29,12 @@
 	<table class="param_table" style="margin-left:10px;" >
 		<tr>
 			<td style="width:150px;">
-				<span>名称：</span>
-				<input type="text" id="name" name="name" class="input_0" />
+				<span class="text_ad_0">类型：</span>
+				<select id="type" name="type">
+					<option value="">请选择</option>
+					<option value="1">猫科</option>
+					<option value="2">犬科</option>
+				</select>
 			</td>
 			<td style="">
 			<div class="layui-btn-group">
@@ -65,7 +69,7 @@ $(function(){
         indexCol: true,  //索引列
         params:function(){
         	var param = new Object();
-        	param.name = $.trim($("#name").val());
+        	param.type = $.trim($("#type").val());
         	return param;
         },
         cols: [{title: 'ID', name: 'id', width:60, hidden:true},

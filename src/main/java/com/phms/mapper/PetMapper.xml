@@ -359,8 +359,8 @@
       <if test="name!=null and name !=''" >
         AND name like concat('%',#{name},'%')
       </if>
-      <if test="userId !=null and userId!=''">
-        user_id = #{userId}
+      <if test="userId!=null and userId!=''">
+        AND user_id = #{userId}
       </if>
     </where>
     ORDER BY id DESC
@@ -379,7 +379,7 @@
         AND name like concat('%',#{name},'%')
       </if>
       <if test="userId !=null and userId!=''">
-        user_id = #{userId}
+        AND user_id = #{userId}
       </if>
     </where>
   </select>

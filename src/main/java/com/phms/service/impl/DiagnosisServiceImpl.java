@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -61,6 +62,16 @@ public class DiagnosisServiceImpl implements DiagnosisService {
                     }
                 }
                 resule.add(d);
+            }
+            if (diagnosis.getName()!=null && ""!=diagnosis.getName()){
+                Iterator<Diagnosis> iterator = resule.iterator();
+                while (iterator.hasNext()){
+                    Diagnosis p = iterator.next();
+                    if (!p.getName().contains(diagnosis.getName())){
+                        iterator.remove();
+                    }
+                }
+                size = rows.size();
             }
         } catch (Exception e) {
             logger.error("根据条件查询异常", e);

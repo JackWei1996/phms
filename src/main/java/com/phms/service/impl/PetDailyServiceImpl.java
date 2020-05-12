@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -36,6 +37,16 @@ public class PetDailyServiceImpl implements PetDailyService {
                 p.setName(pet.getName());
             }
             size = petDailyMapper.countAllByLimit(po);
+            if (po.getName()!=null && ""!=po.getName()){
+                Iterator<PetDaily> iterator = rows.iterator();
+                while (iterator.hasNext()){
+                    PetDaily p = iterator.next();
+                    if (!p.getName().contains(po.getName())){
+                        iterator.remove();
+                    }
+                }
+                size = rows.size();
+            }
         } catch (Exception e) {
             logger.error("根据条件查询异常", e);
         }
