@@ -46,11 +46,18 @@ layui.use('laydate', function(){
 
 	  //执行一个laydate实例
 	  laydate.render({
-	    elem: '#appTime' //指定元素
+	      elem: '#appTime' //指定元素
           ,type: 'datetime'
-	    ,trigger : 'click'
+	      ,trigger : 'click'
+          ,min:minDate()
 	  });
 });
+
+// 设置最小可选的日期
+function minDate(){
+    var now = new Date();
+    return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+}
 
 var petId = [[${petId}]];
 
